@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { products, collections } from "@/data";
@@ -11,23 +12,14 @@ import { Wordmark } from "@/components/layout/Wordmark";
 import { useUi } from "@/stores/ui";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
 import { easeEditorial } from "@/lib/motion";
+import { filterProductsByQuery, matchesQuery } from "@/lib/search";
 
 const POPULAR = ["Signet ring", "Tennis bracelet", "Gold hoops", "Diamond pendant", "Nocturne"];
-
-/** Token / prefix match so "ring" hits Rings, not Earrings. */
-function matchesQuery(
-  haystack: string,
-  q: string,
-): boolean {
-  const text = haystack.toLowerCase();
-  if (!text) return false;
-  if (text === q || text.startsWith(`${q} `)) return true;
-  return text.split(/[\s,/|&+.-]+/).some((token) => token === q || token.startsWith(q));
-}
 
 export function SearchOverlay() {
   const open = useUi((s) => s.overlay === "search");
   const close = useUi((s) => s.close);
+  const router = useRouter();
   const money = useRegionalMoney();
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,19 +41,45 @@ export function SearchOverlay() {
   }, [open, close]);
 
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     if (!q) return products.slice(0, 4);
-    return products
-      .filter(
-        (p) =>
-          matchesQuery(p.name, q) ||
-          matchesQuery(p.category, q) ||
-          matchesQuery(p.categoryLabel, q) ||
-          matchesQuery(p.collectionLabel, q) ||
-          matchesQuery(p.materials.join(" "), q),
-      )
-      .slice(0, 6);
+    return filterProductsByQuery(products, q).slice(0, 6);
   }, [query]);
+
+  function submitSearch(raw: string) {
+    const q = raw.trim();
+    if (!q) {
+      close();
+      router.push("/jewellery");
+      return;
+    }
+
+    const qLower = q.toLowerCase();
+    const collectionHit = collections.find(
+      (c) => c.slug === qLower || c.name.toLowerCase() === qLower || matchesQuery(c.name, qLower),
+    );
+    if (collectionHit && (collectionHit.slug === qLower || collectionHit.name.toLowerCase() === qLower)) {
+      close();
+      router.push(`/collections/${collectionHit.slug}`);
+      return;
+    }
+
+    const matched = filterProductsByQuery(products, q);
+    const exactProduct = matched.find((p) => p.name.toLowerCase() === qLower);
+    if (exactProduct) {
+      close();
+      router.push(`/jewellery/${exactProduct.category}/${exactProduct.slug}`);
+      return;
+    }
+
+    close();
+    router.push(`/jewellery?q=${encodeURIComponent(q)}`);
+  }
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    submitSearch(query);
+  }
 
   return (
     <AnimatePresence>
@@ -94,8 +112,12 @@ export function SearchOverlay() {
                   <X size={22} strokeWidth={1.3} />
                 </button>
               </div>
-              <div className="flex items-center gap-3 border-b border-ink pb-3 sm:gap-3.5 sm:pb-3.5">
-                <Search size={18} strokeWidth={1.3} className="shrink-0 text-ink-muted" />
+              <form
+                onSubmit={onSubmit}
+                className="flex items-center gap-3 border-b border-ink pb-3 sm:gap-3.5 sm:pb-3.5"
+                role="search"
+              >
+                <Search size={18} strokeWidth={1.3} className="shrink-0 text-ink-muted" aria-hidden />
                 <input
                   ref={inputRef}
                   value={query}
@@ -104,9 +126,13 @@ export function SearchOverlay() {
                   aria-label="Search"
                   autoComplete="off"
                   spellCheck={false}
+                  enterKeyHint="search"
                   className="w-full min-h-[1.75rem] bg-transparent font-sans text-[0.95rem] leading-normal text-ink caret-ink placeholder:text-ink-faint outline-none focus:outline-none focus-visible:!outline-none focus-visible:!outline-offset-0 sm:min-h-[2rem]"
                 />
-              </div>
+                <button type="submit" className="sr-only">
+                  Search
+                </button>
+              </form>
 
               <div className="grid gap-10 py-10 lg:grid-cols-[1fr_2fr]">
                 <div className="space-y-8">
@@ -116,7 +142,8 @@ export function SearchOverlay() {
                       {POPULAR.map((p) => (
                         <li key={p}>
                           <button
-                            onClick={() => setQuery(p)}
+                            type="button"
+                            onClick={() => submitSearch(p)}
                             className="link-underline font-sans text-[0.95rem] text-ink"
                           >
                             {p}

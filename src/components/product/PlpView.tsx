@@ -6,7 +6,7 @@ import { SlidersHorizontal } from "lucide-react";
 import type { Product } from "@/types";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Drawer } from "@/components/ui/Drawer";
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import {
   FilterGroup,
   CheckRow,
@@ -58,17 +58,20 @@ export function PlpView({
   initialSort = "featured",
   initialMetals = [],
   initialStones = [],
+  searchMode = false,
 }: {
   products: Product[];
   activeCategory?: string;
   initialSort?: SortKey;
   initialMetals?: string[];
   initialStones?: string[];
+  /** Search results: hide category tabs, filters, and sort. */
+  searchMode?: boolean;
 }) {
-  const priceCeiling = useMemo(
-    () => Math.ceil(Math.max(...products.map((p) => p.price)) / 100) * 100,
-    [products],
-  );
+  const priceCeiling = useMemo(() => {
+    if (!products.length) return 1000;
+    return Math.ceil(Math.max(...products.map((p) => p.price)) / 100) * 100;
+  }, [products]);
   const [filters, setFilters] = useState<FilterState>(() => ({
     ...emptyFilters(priceCeiling),
     metals: initialMetals,
@@ -192,6 +195,23 @@ export function PlpView({
       </FilterGroup>
     </div>
   );
+
+  if (searchMode) {
+    if (products.length === 0) {
+      return (
+        <div className="flex min-h-[40vh] flex-col items-center justify-center text-center">
+          <p className="font-display text-3xl text-ink">No pieces match your search</p>
+          <p className="mt-3 max-w-[36ch] font-sans text-[0.9rem] text-ink-muted">
+            Try another keyword, or browse the full collection.
+          </p>
+          <ButtonLink variant="outline" className="mt-7" href="/jewellery">
+            Browse all jewellery
+          </ButtonLink>
+        </div>
+      );
+    }
+    return <ProductGrid products={products} />;
+  }
 
   return (
     <>
