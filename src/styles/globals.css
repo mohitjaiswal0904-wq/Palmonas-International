@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Palmonas International — Design Tokens
+   Quiet. Rare. Modern. Precise. Emotional. Expensive.
+   ============================================================ */
+
+:root {
+  /* Surfaces — pure white ground */
+  --ivory: #ffffff;
+  --surface: #ffffff;
+  /* Not a page background: image ground + skeleton tone only */
+  --stone: #f2f2f1;
+
+  /* Ink */
+  --ink: #1a1816;
+  --ink-muted: #6b6b68;
+  --ink-faint: #9a9a96;
+
+  /* Line & accent */
+  --line: #e6e6e4;
+  --line-strong: #cfcfcb;
+  --accent: #8a7a66;
+  --accent-deep: #6c5f4f;
+
+  /* Semantic */
+  --success: #4a5d43;
+  --error: #8a3f39;
+
+  /* Radius — minimal */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 200ms;
+  --dur-standard: 400ms;
+  --dur-editorial: 800ms;
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-stone: var(--stone);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-display: var(--font-bodoni), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+
+  /* Editorial spacing scale */
+  --spacing-section: 7rem;
+  --spacing-section-lg: 10rem;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
+  overflow-x: hidden;
+}
+
+/* Typographic rhythm helpers */
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.tracking-luxe {
+  letter-spacing: 0.22em;
+}
+.tracking-wide-sm {
+  letter-spacing: 0.14em;
+}
+
+/* Large campaign display — same face, tighter hero rhythm */
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Focus states — visible, accessible, refined */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+/* Thin scrollbar for overlays */
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+}
+
+/* Link underline reveal */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--dur-standard) var(--ease-out-soft);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Primary nav — full-bleed editorial cells */
+.nav-cell {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--ink);
+  transition:
+    color 380ms var(--ease-out-soft),
+    letter-spacing 480ms var(--ease-editorial),
+    background-color 380ms var(--ease-out-soft);
+}
+.nav-cell:hover,
+.nav-cell[data-active="true"] {
+  color: var(--accent-deep);
+  letter-spacing: 0.08em;
+  background: color-mix(in srgb, var(--stone) 70%, transparent);
+}
+
+/* Compact nav flyout links — slide + underline on hover */
+.nav-flyout-link {
+  position: relative;
+  display: block;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 1.25rem 100%;
+  transition:
+    color 320ms var(--ease-out-soft),
+    transform 320ms var(--ease-editorial),
+    background-size 380ms var(--ease-out-soft),
+    padding-left 320ms var(--ease-editorial);
+}
+.nav-flyout-link:hover {
+  color: var(--ink);
+  transform: translateX(4px);
+  padding-left: 1.45rem;
+  background-size: calc(100% - 2.7rem) 1px;
+  background-position: 1.45rem 100%;
+}
+
+/* Reveal-on-scroll baseline (JS toggles data-visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-editorial) var(--ease-editorial),
+    transform var(--dur-editorial) var(--ease-editorial);
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Marquee for announcement bar */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
