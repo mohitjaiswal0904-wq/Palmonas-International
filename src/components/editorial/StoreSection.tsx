@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
-import { featuredStores } from "@/data/stores";
+import { featuredStores } from "@/data";
 import { BANNERS } from "@/lib/banners";
 
 export function StoreSection() {

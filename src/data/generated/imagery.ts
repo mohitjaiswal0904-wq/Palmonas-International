@@ -5,13 +5,9 @@
  * Product shots are square (1:1) studio images; banners are landscape.
  */
 
-import type { CategorySlug } from "@/types";
+import type { CategorySlug, ImageSet } from "@/types";
 
-export type ImageSet = {
-  primary: string;
-  hover: string;
-  extra: string[];
-};
+export type { ImageSet };
 
 export const CATEGORY_IMAGERY: Record<CategorySlug, ImageSet[]> = {
   "rings": [

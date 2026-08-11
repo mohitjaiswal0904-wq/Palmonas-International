@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
-import { collections } from "@/data/collections";
+import { collections } from "@/data";
 import { bannerFor } from "@/lib/banners";
 
 export const metadata: Metadata = {

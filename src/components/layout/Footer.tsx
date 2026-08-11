@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { RegionSwitcher } from "@/components/layout/RegionSwitcher";
-import { regionById } from "@/data/regions";
+import { regionById } from "@/data";
 import { useRegion } from "@/stores/region";
 import { useHydrated } from "@/hooks/useHydrated";
 

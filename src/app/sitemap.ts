@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
-import { products } from "@/data/products";
-import { collections } from "@/data/collections";
-import { categories } from "@/data/categories";
+import { products, collections, categories } from "@/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;

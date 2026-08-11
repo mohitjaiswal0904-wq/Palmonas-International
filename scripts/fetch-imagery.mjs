@@ -119,13 +119,9 @@ async function main() {
  * Product shots are square (1:1) studio images; banners are landscape.
  */
 
-import type { CategorySlug } from "@/types";
+import type { CategorySlug, ImageSet } from "@/types";
 
-export type ImageSet = {
-  primary: string;
-  hover: string;
-  extra: string[];
-};
+export type { ImageSet };
 
 export const CATEGORY_IMAGERY: Record<CategorySlug, ImageSet[]> = ${JSON.stringify(imagery, null, 2)};
 
@@ -134,8 +130,8 @@ export const BANNERS = ${JSON.stringify(banner, null, 2)} as const;
 export const ALL_BANNERS: string[] = ${JSON.stringify(banners.slice(0, 40), null, 2)};
 `;
 
-  writeFileSync(new URL("../src/data/imagery.ts", import.meta.url), file);
-  console.log("\nWrote src/data/imagery.ts");
+  writeFileSync(new URL("../src/data/generated/imagery.ts", import.meta.url), file);
+  console.log("\nWrote src/data/generated/imagery.ts");
 }
 
 main().catch((e) => {

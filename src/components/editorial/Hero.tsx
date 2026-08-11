@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ButtonLink } from "@/components/ui/Button";
-import { BANNERS } from "@/data/imagery";
+import { BANNERS } from "@/lib/banners";
 import { easeEditorial } from "@/lib/motion";
 
 export function Hero() {

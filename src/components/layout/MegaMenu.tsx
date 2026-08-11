@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { NavEntry } from "@/data/navigation";
+import type { NavEntry } from "@/data";
 import { Media } from "@/components/ui/Media";
 import { Container } from "@/components/ui/Container";
 import { bannerFor } from "@/lib/banners";

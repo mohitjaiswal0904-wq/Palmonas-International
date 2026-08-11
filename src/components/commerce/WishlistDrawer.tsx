@@ -9,7 +9,7 @@ import { useUi } from "@/stores/ui";
 import { useWishlist } from "@/stores/wishlist";
 import { useCart } from "@/stores/cart";
 import { useHydrated } from "@/hooks/useHydrated";
-import { productById } from "@/data/products";
+import { productById } from "@/data";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
 
 export function WishlistDrawer() {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
-import { homeCategories } from "@/data/homeCategories";
+import { homeCategories } from "@/data";
 import { cn } from "@/lib/cn";
 
 function plateFor(id: string) {

@@ -8,8 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { SectionHeading } from "@/components/editorial/SectionHeading";
 import { bannerFor } from "@/lib/banners";
-import { collections, collectionBySlug } from "@/data/collections";
-import { productsByCollection } from "@/data/products";
+import { collections, collectionBySlug, productsByCollection } from "@/data";
 
 export function generateStaticParams() {
   return collections.map((c) => ({ slug: c.slug }));

@@ -13,8 +13,7 @@ import {
   type FilterState,
   emptyFilters,
 } from "@/components/product/FilterControls";
-import { categories } from "@/data/categories";
-import { collections } from "@/data/collections";
+import { categories, collections } from "@/data";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
 import { useUi } from "@/stores/ui";
 import { cn } from "@/lib/cn";

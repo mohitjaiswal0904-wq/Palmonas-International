@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { Drawer } from "@/components/ui/Drawer";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { RegionSwitcher } from "@/components/layout/RegionSwitcher";
-import { primaryNav } from "@/data/navigation";
+import { primaryNav } from "@/data";
 import { useUi } from "@/stores/ui";
 import { easeOutSoft } from "@/lib/motion";
 

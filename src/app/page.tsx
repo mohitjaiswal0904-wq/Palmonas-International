@@ -10,9 +10,8 @@ import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductRail } from "@/components/product/ProductRail";
 import { Wordmark } from "@/components/layout/Wordmark";
-import { newArrivals, bestSellers, productsByCollection } from "@/data/products";
-import { categories } from "@/data/categories";
-import { CATEGORY_IMAGERY } from "@/data/imagery";
+import { newArrivals, bestSellers, productsByCollection, categories } from "@/data";
+import { CATEGORY_IMAGERY } from "@/data/generated/imagery";
 import { BANNERS } from "@/lib/banners";
 import { features } from "@/lib/features";
 

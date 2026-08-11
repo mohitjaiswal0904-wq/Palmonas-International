@@ -1,9 +1,13 @@
 import type { Collection } from "@/types";
+import { COLLECTION_LABELS } from "./taxonomy";
 
+/**
+ * Authored collection copy. Images + productIds are filled at load by products.ts.
+ */
 export const collections: Collection[] = [
   {
     id: "essential",
-    name: "The Essential Collection",
+    name: COLLECTION_LABELS.essential,
     slug: "essential",
     tagline: "The pieces you never take off",
     description:
@@ -16,7 +20,7 @@ export const collections: Collection[] = [
   },
   {
     id: "nocturne",
-    name: "Nocturne",
+    name: COLLECTION_LABELS.nocturne,
     slug: "nocturne",
     tagline: "For the hours after dark",
     description:
@@ -29,7 +33,7 @@ export const collections: Collection[] = [
   },
   {
     id: "aurelia",
-    name: "Aurelia",
+    name: COLLECTION_LABELS.aurelia,
     slug: "aurelia",
     tagline: "Warmth, cast in gold",
     description:
@@ -42,7 +46,7 @@ export const collections: Collection[] = [
   },
   {
     id: "sculpted",
-    name: "Sculpted",
+    name: COLLECTION_LABELS.sculpted,
     slug: "sculpted",
     tagline: "Architecture for the body",
     description:
@@ -55,7 +59,7 @@ export const collections: Collection[] = [
   },
   {
     id: "elan",
-    name: "Élan",
+    name: COLLECTION_LABELS.elan,
     slug: "elan",
     tagline: "Movement, in miniature",
     description:
@@ -68,7 +72,7 @@ export const collections: Collection[] = [
   },
   {
     id: "signature",
-    name: "The Signature Collection",
+    name: COLLECTION_LABELS.signature,
     slug: "signature",
     tagline: "Our most considered work",
     description:

@@ -2,7 +2,8 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { DEFAULT_REGION_ID, regionById, type Region } from "@/data/regions";
+import { DEFAULT_REGION_ID, regionById } from "@/data";
+import type { Region } from "@/types";
 
 type RegionState = {
   regionId: string;

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { flagUrl, regions } from "@/data/regions";
+import { flagUrl, regions } from "@/data";
 import { useRegion } from "@/stores/region";
 import { useHydrated } from "@/hooks/useHydrated";
 import { easeOutSoft } from "@/lib/motion";

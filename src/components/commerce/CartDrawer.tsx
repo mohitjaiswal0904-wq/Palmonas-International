@@ -9,7 +9,7 @@ import { useUi } from "@/stores/ui";
 import { useCart } from "@/stores/cart";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
-import { bestSellers } from "@/data/products";
+import { bestSellers } from "@/data";
 import type { PlateKind } from "@/types";
 
 export function CartDrawer() {

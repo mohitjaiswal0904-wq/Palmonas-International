@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search, User, Heart, ShoppingBag, Menu, ChevronDown } from "lucide-react";
-import { primaryNav } from "@/data/navigation";
+import { primaryNav } from "@/data";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { RegionSwitcher } from "@/components/layout/RegionSwitcher";

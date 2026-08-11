@@ -1,4 +1,4 @@
-import type { Region } from "@/data/regions";
+import type { Region } from "@/types";
 
 export function formatMoney(
   amount: number,

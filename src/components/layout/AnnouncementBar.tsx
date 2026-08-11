@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { announcements } from "@/data/navigation";
+import { announcements } from "@/data";
 
 export function AnnouncementBar() {
   const [i, setI] = useState(0);

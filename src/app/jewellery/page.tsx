@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { PlpView } from "@/components/product/PlpView";
-import { products } from "@/data/products";
+import { products } from "@/data";
 
 export const metadata: Metadata = {
   title: "Jewellery",

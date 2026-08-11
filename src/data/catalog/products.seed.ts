@@ -1,102 +1,15 @@
-import type {
-  Product,
-  MetalOption,
-  StoneOption,
-  CategorySlug,
-  ProductBadge,
-  ProductImage,
-  PlateKind,
-} from "@/types";
-import { slugify } from "@/lib/format";
-import { CATEGORY_IMAGERY } from "@/data/imagery";
+import type { CategorySlug, CollectionSlug, ProductBadge, Product } from "@/types";
 
-const METALS: Record<string, MetalOption> = {
-  yellow: { id: "yellow", label: "18K Yellow Gold", swatch: "#c9a95f" },
-  white: { id: "white", label: "18K White Gold", swatch: "#dcdcdc" },
-  rose: { id: "rose", label: "18K Rose Gold", swatch: "#d8a48a" },
-  platinum: { id: "platinum", label: "Platinum", swatch: "#c7c9cc" },
-};
+export type MetalId = "yellow" | "white" | "rose" | "platinum";
+export type StoneId = "diamond" | "sapphire" | "emerald" | "ruby" | "none";
 
-const STONES: Record<string, StoneOption> = {
-  diamond: { id: "diamond", label: "Diamond", swatch: "#eef1f4" },
-  sapphire: { id: "sapphire", label: "Sapphire", swatch: "#2a4a7a" },
-  emerald: { id: "emerald", label: "Emerald", swatch: "#2f5d4a" },
-  ruby: { id: "ruby", label: "Ruby", swatch: "#7a2233" },
-  none: { id: "none", label: "No Stone", swatch: "#e7e2da" },
-};
-
-const CATEGORY_LABEL: Record<CategorySlug, string> = {
-  rings: "Rings",
-  necklaces: "Necklaces",
-  earrings: "Earrings",
-  bracelets: "Bracelets",
-  bangles: "Bangles",
-  charms: "Charms",
-};
-
-const COLLECTION_LABEL: Record<string, string> = {
-  essential: "The Essential Collection",
-  nocturne: "Nocturne",
-  aurelia: "Aurelia",
-  sculpted: "Sculpted",
-  elan: "Élan",
-  signature: "The Signature Collection",
-};
-
-const plateKindFor = (c: CategorySlug): PlateKind => {
-  if (c === "rings") return "ring";
-  if (c === "necklaces" || c === "charms") return "necklace";
-  if (c === "earrings") return "earring";
-  return "bracelet";
-};
-
-/**
- * Assigns real first-party photography to each product, distributed
- * deterministically across the available sets for its category so no two
- * products in a category share the same shot. Falls back to generated art
- * plates if a category has no imagery.
- */
-function buildImages(
-  name: string,
-  category: CategorySlug,
-  indexInCategory: number,
-): ProductImage[] {
-  const kind = plateKindFor(category);
-  const base = slugify(name);
-  const sets = CATEGORY_IMAGERY[category] ?? [];
-  const set = sets.length ? sets[indexInCategory % sets.length] : undefined;
-
-  const gallery = set
-    ? [set.primary, set.hover, ...set.extra].filter(Boolean)
-    : [];
-
-  const defs: Array<{ alt: string; k: ProductImage["kind"]; plate: PlateKind }> = [
-    { alt: `${name} — studio view`, k: "primary", plate: kind },
-    { alt: `${name} — alternate angle`, k: "hover", plate: kind },
-    { alt: `${name} — worn`, k: "worn", plate: "editorial" },
-    { alt: `${name} — close detail`, k: "detail", plate: "detail" },
-    { alt: `${name} — editorial`, k: "editorial", plate: "editorial" },
-  ];
-
-  // Only expose as many views as we have distinct photography for.
-  const count = gallery.length > 0 ? Math.max(2, gallery.length) : defs.length;
-
-  return defs.slice(0, count).map((d, i) => ({
-    src: gallery[i] ?? gallery[gallery.length - 1] ?? "",
-    alt: d.alt,
-    kind: d.k,
-    seed: `${base}-${i}`,
-    plate: d.plate,
-  }));
-}
-
-type Seed = {
+export type ProductSeed = {
   name: string;
   category: CategorySlug;
-  collection: string;
+  collection: CollectionSlug;
   price: number;
-  metals: (keyof typeof METALS)[];
-  stones: (keyof typeof STONES)[];
+  metals: MetalId[];
+  stones: StoneId[];
   sizes: string[];
   badges: ProductBadge[];
   description: string;
@@ -108,14 +21,11 @@ type Seed = {
   reviewCount: number;
 };
 
-const RING_SIZES = ["4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8"];
-const BAND_SIZES = ["XS", "S", "M", "L"];
-const ONE_SIZE = ["One size"];
+export const RING_SIZES = ["4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8"];
+export const BAND_SIZES = ["XS", "S", "M", "L"];
+export const ONE_SIZE = ["One size"];
 
-const CARE =
-  "Store separately in the provided pouch. Avoid contact with perfume and cosmetics. Wipe gently with a soft, dry cloth. Suitable for daily wear.";
-
-const seeds: Seed[] = [
+export const productSeeds: ProductSeed[] = [
   // ---- Rings ----
   {
     name: "Meridian Signet",
@@ -531,81 +441,3 @@ const seeds: Seed[] = [
     reviewCount: 41,
   },
 ];
-
-function buildProduct(s: Seed, indexInCategory: number): Product {
-  const slug = slugify(s.name);
-  return {
-    id: slug,
-    name: s.name,
-    slug,
-    price: s.price,
-    currency: "USD",
-    category: s.category,
-    categoryLabel: CATEGORY_LABEL[s.category],
-    collection: s.collection,
-    collectionLabel: COLLECTION_LABEL[s.collection],
-    description: s.description,
-    story: s.story,
-    materials: [
-      "18k thick gold plating over 925 sterling silver",
-      "Tarnish-resistant, water-safe finish",
-      "Nickel-free · hypoallergenic",
-    ],
-    metals: s.metals.map((m) => METALS[m]),
-    stones: s.stones.map((st) => STONES[st]),
-    sizes: s.sizes,
-    images: buildImages(s.name, s.category, indexInCategory),
-    badges: s.badges,
-    availability: s.availability ?? "in-stock",
-    deliveryEstimate:
-      (s.availability ?? "in-stock") === "made-to-order"
-        ? "Made to order · ships in 3–4 weeks"
-        : "Complimentary express delivery in 2–4 days",
-    rating: s.rating,
-    reviewCount: s.reviewCount,
-    dimensions: s.dimensions,
-    stoneDetails: s.stoneDetails,
-    care: CARE,
-    relatedProducts: [],
-  };
-}
-
-const categoryCounters = new Map<CategorySlug, number>();
-export const products: Product[] = seeds.map((s) => {
-  const n = categoryCounters.get(s.category) ?? 0;
-  categoryCounters.set(s.category, n + 1);
-  return buildProduct(s, n);
-});
-
-// Wire related products: same collection first, then same category.
-for (const p of products) {
-  const sameCollection = products
-    .filter((o) => o.id !== p.id && o.collection === p.collection)
-    .map((o) => o.id);
-  const sameCategory = products
-    .filter(
-      (o) =>
-        o.id !== p.id &&
-        o.category === p.category &&
-        !sameCollection.includes(o.id),
-    )
-    .map((o) => o.id);
-  p.relatedProducts = [...sameCollection, ...sameCategory].slice(0, 4);
-}
-
-export const productBySlug = (slug: string) =>
-  products.find((p) => p.slug === slug);
-
-export const productsByCategory = (category: CategorySlug) =>
-  products.filter((p) => p.category === category);
-
-export const productsByCollection = (collection: string) =>
-  products.filter((p) => p.collection === collection);
-
-export const productById = (id: string) => products.find((p) => p.id === id);
-
-export const newArrivals = () =>
-  products.filter((p) => p.badges.includes("NEW"));
-
-export const bestSellers = () =>
-  products.filter((p) => p.badges.includes("BESTSELLER"));

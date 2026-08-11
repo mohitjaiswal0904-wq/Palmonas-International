@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { regionById } from "@/data/regions";
+import { regionById } from "@/data";
 import { formatRegional } from "@/lib/format";
 import { useRegion } from "@/stores/region";
 import { useHydrated } from "@/hooks/useHydrated";

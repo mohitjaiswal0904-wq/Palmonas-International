@@ -1,11 +1,8 @@
-export type Store = {
-  id: string;
-  city: string;
-  name: string;
-  address: string;
-  hours: string;
-};
+import type { Store } from "@/types";
 
+export type { Store };
+
+/** India boutique highlights for the homepage store section. */
 export const featuredStores: Store[] = [
   {
     id: "mumbai",

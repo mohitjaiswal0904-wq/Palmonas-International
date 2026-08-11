@@ -15,8 +15,8 @@ import {
   productBySlug,
   productById,
   productsByCollection,
-} from "@/data/products";
-import { collectionBySlug } from "@/data/collections";
+  collectionBySlug,
+} from "@/data";
 import { bannerFor } from "@/lib/banners";
 import { SITE } from "@/lib/site";
 import type { CategorySlug } from "@/types";

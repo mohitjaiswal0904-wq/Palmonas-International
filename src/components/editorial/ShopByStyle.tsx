@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
 import { SectionHeading } from "@/components/editorial/SectionHeading";
-import { homeStyles } from "@/data/homeStyles";
+import { homeStyles } from "@/data";
 
 export function ShopByStyle() {
   return (

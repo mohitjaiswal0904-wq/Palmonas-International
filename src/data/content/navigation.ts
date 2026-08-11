@@ -1,28 +1,6 @@
-export type MegaColumn = {
-  title: string;
-  links: { label: string; href: string }[];
-};
+import type { NavEntry } from "@/types";
 
-export type NavLink = {
-  label: string;
-  href: string;
-};
-
-export type NavEntry = {
-  label: string;
-  href: string;
-  /** Compact flyout list (e.g. About Us) */
-  menu?: NavLink[];
-  mega?: {
-    columns: MegaColumn[];
-    editorial: {
-      eyebrow: string;
-      title: string;
-      href: string;
-      seed: string;
-    };
-  };
-};
+export type { MegaColumn, NavLink, NavEntry } from "@/types";
 
 export const primaryNav: NavEntry[] = [
   {
@@ -102,10 +80,4 @@ export const primaryNav: NavEntry[] = [
       { label: "Stores & Services", href: "/stores" },
     ],
   },
-];
-
-export const announcements = [
-  "Complimentary express delivery worldwide",
-  "18k thick gold plating · water-safe · made to be worn",
-  "Book a private virtual appointment with a specialist",
 ];

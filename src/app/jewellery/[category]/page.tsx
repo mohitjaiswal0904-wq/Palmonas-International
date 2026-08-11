@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { PlpView } from "@/components/product/PlpView";
-import { categories, categoryBySlug } from "@/data/categories";
-import { productsByCategory } from "@/data/products";
+import { categories, categoryBySlug, productsByCategory } from "@/data";
 import type { CategorySlug } from "@/types";
 
 export function generateStaticParams() {

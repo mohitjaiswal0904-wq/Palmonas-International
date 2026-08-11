@@ -10,6 +10,10 @@
  * that begins with http(s).
  */
 
+import type { PlateKind } from "@/types";
+
+export type { PlateKind };
+
 type Palette = {
   base: string;
   deep: string;
@@ -34,14 +38,6 @@ function hash(seed: string): number {
   }
   return Math.abs(h);
 }
-
-export type PlateKind =
-  | "ring"
-  | "necklace"
-  | "earring"
-  | "bracelet"
-  | "editorial"
-  | "detail";
 
 function shapeFor(kind: PlateKind, p: Palette, h: number): string {
   const stroke = p.accent;

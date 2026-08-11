@@ -1,4 +1,4 @@
-import { ALL_BANNERS, BANNERS } from "@/data/imagery";
+import { ALL_BANNERS, BANNERS } from "@/data/generated/imagery";
 
 /**
  * Deterministically picks a campaign banner for a given key (collection slug,
