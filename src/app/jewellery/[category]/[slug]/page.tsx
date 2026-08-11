@@ -5,9 +5,9 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
-import { Accordion } from "@/components/ui/Accordion";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductBuyPanel } from "@/components/product/ProductBuyPanel";
+import { ProductDetails } from "@/components/product/ProductDetails";
 import { ProductRail } from "@/components/product/ProductRail";
 import { SectionHeading } from "@/components/editorial/SectionHeading";
 import {
@@ -85,46 +85,6 @@ export default async function ProductPage({
     },
   };
 
-  const details = [
-    { title: "Description", content: <p>{product.description}</p> },
-    {
-      title: "Materials",
-      content: (
-        <ul className="space-y-1.5">
-          {product.materials.map((m) => (
-            <li key={m}>{m}</li>
-          ))}
-        </ul>
-      ),
-    },
-    { title: "Dimensions", content: <p>{product.dimensions}</p> },
-    { title: "Stone details", content: <p>{product.stoneDetails}</p> },
-    {
-      title: "Craftsmanship",
-      content: (
-        <p>
-          Hand-finished in our atelier. Every surface is polished by eye and
-          every stone set by hand, then quality-checked against our house
-          standard before it leaves us.
-        </p>
-      ),
-    },
-    { title: "Care", content: <p>{product.care}</p> },
-    {
-      title: "Shipping & returns",
-      content: (
-        <p>
-          {product.deliveryEstimate}. Complimentary returns within 30 days in
-          original condition. Each order arrives in signature packaging.
-        </p>
-      ),
-    },
-    {
-      title: "Warranty",
-      content: <p>Covered by our lifetime craftsmanship warranty against manufacturing defects.</p>,
-    },
-  ];
-
   return (
     <>
       <script
@@ -132,9 +92,11 @@ export default async function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
 
+      {/* Mobile sticky CTA clearance applied to the whole product page */}
+      <div className="pb-[calc(5.75rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
       {/* Product stage — full viewport width, edge to edge */}
-      <div className="pb-20">
-        <div className="px-5 pt-6 sm:px-8 lg:px-12">
+      <div className="pb-10 lg:pb-20">
+        <div className="px-5 pt-4 sm:px-8 sm:pt-6 lg:px-12">
           <Breadcrumbs
             items={[
               { label: "Jewellery", href: "/jewellery" },
@@ -144,20 +106,18 @@ export default async function ProductPage({
           />
         </div>
 
-        <div className="mt-6 grid lg:grid-cols-[minmax(0,1.7fr)_minmax(340px,0.9fr)]">
+        <div className="mt-4 grid lg:mt-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(340px,0.9fr)]">
           <ProductGallery images={product.images} />
-          <div className="px-5 py-8 sm:px-8 lg:border-l lg:border-line lg:px-10 lg:py-2 xl:px-14">
+          <div className="px-5 py-6 sm:px-8 sm:py-8 lg:border-l lg:border-line lg:px-10 lg:py-2 xl:px-14">
             <ProductBuyPanel product={product} />
           </div>
         </div>
-
-        <div className="mt-16 max-w-[640px] px-5 sm:px-8 lg:px-12">
-          <Accordion items={details} defaultOpen={0} />
-        </div>
       </div>
 
+      <ProductDetails product={product} />
+
       {/* Storytelling — The Story */}
-      <section className="border-t border-line bg-surface py-24 sm:py-32">
+      <section className="border-t border-line bg-surface py-16 sm:py-24 lg:py-32">
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <Reveal as="div">
@@ -193,7 +153,7 @@ export default async function ProductPage({
       </section>
 
       {/* The Craft + The Material */}
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-24 lg:py-32">
         <Container>
           <div className="grid gap-16 lg:grid-cols-2">
             <Reveal>
@@ -238,7 +198,7 @@ export default async function ProductPage({
 
       {/* Complete the look / From the collection */}
       {related.length > 0 && (
-        <section className="border-t border-line py-20 sm:py-24">
+        <section className="border-t border-line py-16 sm:py-20 lg:py-24">
           <Container>
             <Reveal>
               <SectionHeading eyebrow="Curated for this piece" title="Complete the look" />
@@ -251,7 +211,7 @@ export default async function ProductPage({
       )}
 
       {fromCollection.length > 0 && (
-        <section className="pb-28">
+        <section className="pb-20 sm:pb-28">
           <Container>
             <Reveal>
               <SectionHeading
@@ -266,6 +226,7 @@ export default async function ProductPage({
           </Container>
         </section>
       )}
+      </div>
     </>
   );
 }

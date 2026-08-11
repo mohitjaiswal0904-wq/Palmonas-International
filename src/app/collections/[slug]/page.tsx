@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
-import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductGrid } from "@/components/product/ProductGrid";
-import { SectionHeading } from "@/components/editorial/SectionHeading";
 import { bannerFor } from "@/lib/banners";
 import { collections, collectionBySlug, productsByCollection } from "@/data";
 
@@ -43,7 +41,7 @@ export default async function CollectionPage({
   return (
     <>
       {/* Campaign hero */}
-      <section className="relative h-[72vh] min-h-[440px] w-full overflow-hidden bg-ink">
+      <section className="relative h-[68dvh] min-h-[420px] w-full overflow-hidden bg-ink sm:h-[72vh] sm:min-h-[440px]">
         <div className="absolute inset-0">
           <Media
             src={bannerFor(`hero-${collection.slug}`)}
@@ -53,73 +51,31 @@ export default async function CollectionPage({
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/25 to-ink/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/25" />
         </div>
-        <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-5 pb-14 sm:px-8 lg:px-12 lg:pb-20">
-          <p className="font-sans text-[0.68rem] font-medium uppercase tracking-luxe text-surface/80">
-            {collection.tagline}
+        <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-5 pb-[max(2.5rem,calc(1rem+env(safe-area-inset-bottom)))] sm:px-8 sm:pb-14 lg:px-12 lg:pb-20">
+          <p className="font-sans text-[0.68rem] font-medium uppercase tracking-luxe text-surface/75">
+            {items.length} {items.length === 1 ? "piece" : "pieces"} · {collection.tagline}
           </p>
-          <h1 className="display-hero mt-4 text-5xl text-surface sm:text-7xl">
-            {collection.name}
-          </h1>
-        </div>
-      </section>
-
-      {/* Statement */}
-      <section className="py-20 sm:py-28">
-        <Container width="narrow">
-          <Reveal>
-            <p className="text-center font-display text-2xl leading-[1.35] text-ink sm:text-3xl">
-              {collection.description}
-            </p>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Editorial split */}
-      <section className="pb-20 sm:pb-28">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal as="div">
-              <div className="relative aspect-[4/5] overflow-hidden bg-stone">
-                <Media
-                  src={bannerFor(`editorial-${collection.slug}`)}
-                  seed={`collection-editorial-${collection.slug}`}
-                  kind="editorial"
-                  alt={collection.name}
-                  sizes="50vw"
-                />
-              </div>
-            </Reveal>
-            <div>
-              <Reveal>
-                <p className="eyebrow mb-4">The Story</p>
-                <h2 className="font-display text-4xl leading-tight text-ink">
-                  {collection.tagline}
-                </h2>
-                <p className="mt-6 max-w-[46ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  {collection.story}
-                </p>
-              </Reveal>
-            </div>
+          <div className="mt-3 flex flex-col gap-5 sm:mt-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+            <h1 className="display-hero max-w-[14ch] text-[2.75rem] leading-[1.05] text-surface sm:text-6xl lg:text-7xl">
+              {collection.name}
+            </h1>
+            <Link
+              href="/jewellery"
+              className="link-underline shrink-0 font-sans text-[0.74rem] uppercase tracking-wide-sm text-surface/90"
+            >
+              All jewellery
+            </Link>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* Complete collection */}
-      <section className="border-t border-line py-20 sm:py-24">
+      <section className="border-t border-line py-12 sm:py-16 lg:py-20">
         <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow={`${items.length} pieces`}
-              title="The complete collection"
-              cta={{ label: "All jewellery", href: "/jewellery" }}
-            />
-          </Reveal>
-          <div className="mt-12">
-            <ProductGrid products={items} />
-          </div>
-          <div className="mt-16 flex justify-center">
+          <ProductGrid products={items} />
+          <div className="mt-12 flex justify-center sm:mt-16">
             <ButtonLink href="/jewellery" variant="outline">
               Explore all jewellery
             </ButtonLink>

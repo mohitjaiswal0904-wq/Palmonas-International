@@ -45,9 +45,9 @@ export function StoreSection() {
                 <Reveal key={store.id} delay={0.06 * (i + 1)} as="li">
                   <Link
                     href="/stores"
-                    className="group flex items-baseline justify-between gap-6 py-5"
+                    className="group flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-display text-2xl text-ink transition-colors duration-500 group-hover:text-accent-deep">
                         {store.city}
                       </p>
@@ -55,7 +55,7 @@ export function StoreSection() {
                         {store.name} · {store.address}
                       </p>
                     </div>
-                    <span className="shrink-0 font-sans text-[0.68rem] uppercase tracking-wide-sm text-ink-faint transition-colors duration-500 group-hover:text-ink">
+                    <span className="font-sans text-[0.68rem] uppercase tracking-wide-sm text-ink-faint transition-colors duration-500 group-hover:text-ink sm:shrink-0">
                       {store.hours}
                     </span>
                   </Link>

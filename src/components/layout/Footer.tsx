@@ -55,18 +55,18 @@ export function Footer() {
   const [sent, setSent] = useState(false);
 
   return (
-    <footer className="mt-24 border-t border-line bg-surface">
-      <Container className="py-16">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:grid-cols-6">
+    <footer className="mt-16 border-t border-line bg-surface pb-safe sm:mt-24">
+      <Container className="py-12 sm:py-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-8 sm:gap-y-12 md:grid-cols-4 lg:grid-cols-6">
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <p className="eyebrow mb-5">{col.title}</p>
-              <ul className="space-y-3">
+              <p className="eyebrow mb-4 sm:mb-5">{col.title}</p>
+              <ul className="space-y-1">
                 {col.links.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="link-underline font-sans text-[0.82rem] text-ink-muted transition-colors hover:text-ink"
+                      className="link-underline inline-block py-2 font-sans text-[0.82rem] text-ink-muted transition-colors hover:text-ink"
                     >
                       {l.label}
                     </Link>
@@ -104,7 +104,7 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  className="whitespace-nowrap font-sans text-[0.72rem] uppercase tracking-wide-sm text-ink"
+                  className="min-h-11 whitespace-nowrap px-1 font-sans text-[0.72rem] uppercase tracking-wide-sm text-ink"
                 >
                   Sign up
                 </button>

@@ -54,17 +54,65 @@ export function Header() {
     <header className="sticky top-0 z-50" onMouseLeave={scheduleClose}>
       <AnnouncementBar />
       <div className="relative border-b border-line bg-ivory/90 backdrop-blur-md">
-        {/* Row 1 — wordmark + utility actions */}
+        {/* Row 1 — mobile: compact 3-col · desktop: tall centered mark */}
+        <div className="mx-auto grid h-14 max-w-[1440px] grid-cols-[2.75rem_minmax(0,1fr)_auto] items-center gap-1 px-3 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:px-5 lg:hidden">
+          <button
+            className="inline-flex h-11 w-11 items-center justify-center justify-self-start text-ink"
+            aria-label="Open menu"
+            onClick={() => openOverlay("menu")}
+          >
+            <Menu size={20} strokeWidth={1.3} />
+          </button>
+
+          <div className="flex min-w-0 justify-start">
+            <Wordmark size="xs" priority />
+          </div>
+
+          <div className="flex items-center justify-self-end">
+            <button
+              aria-label="Search"
+              onClick={() => openOverlay("search")}
+              className="inline-flex h-10 w-10 items-center justify-center text-ink"
+            >
+              <Search size={18} strokeWidth={1.3} />
+            </button>
+            <button
+              aria-label={`Wishlist${hydrated && wishCount ? `, ${wishCount} items` : ""}`}
+              onClick={() => openOverlay("wishlist")}
+              className="relative inline-flex h-10 w-10 items-center justify-center text-ink"
+            >
+              <Heart size={18} strokeWidth={1.3} />
+              {hydrated && wishCount > 0 && (
+                <span className="absolute right-0.5 top-0.5 grid h-3.5 min-w-3.5 place-items-center rounded-full bg-ink px-0.5 text-[0.5rem] font-semibold leading-none text-surface">
+                  {wishCount > 9 ? "9+" : wishCount}
+                </span>
+              )}
+            </button>
+            <button
+              aria-label={`Bag${hydrated && cartCount ? `, ${cartCount} items` : ""}`}
+              onClick={() => openOverlay("cart")}
+              className="relative inline-flex h-10 w-10 items-center justify-center text-ink"
+            >
+              <ShoppingBag size={18} strokeWidth={1.3} />
+              {hydrated && cartCount > 0 && (
+                <span className="absolute right-0.5 top-0.5 grid h-3.5 min-w-3.5 place-items-center rounded-full bg-ink px-0.5 text-[0.5rem] font-semibold leading-none text-surface">
+                  {cartCount > 9 ? "9+" : cartCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
         <motion.div
           initial={false}
           animate={{ height: scrolled ? 56 : 80 }}
           transition={transition}
-          className="relative mx-auto flex max-w-[1440px] items-center px-5 sm:px-8 lg:px-12"
+          className="relative mx-auto hidden max-w-[1440px] items-center px-8 lg:flex lg:px-12"
         >
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <motion.div
               initial={false}
-              animate={{ scale: scrolled ? 0.82 : 1 }}
+              animate={{ scale: scrolled ? 0.88 : 1 }}
               transition={transition}
               className="pointer-events-auto origin-center will-change-transform"
             >
@@ -72,38 +120,30 @@ export function Header() {
             </motion.div>
           </div>
 
-          <button
-            className="relative z-10 inline-flex h-9 w-9 items-center justify-center text-ink lg:hidden"
-            aria-label="Open menu"
-            onClick={() => openOverlay("menu")}
-          >
-            <Menu size={20} strokeWidth={1.3} />
-          </button>
-
-          <div className="relative z-10 ml-auto flex items-center gap-1 sm:gap-2">
+          <div className="relative z-10 ml-auto flex items-center gap-1">
             <RegionSwitcher />
             <button
               aria-label="Search"
               onClick={() => openOverlay("search")}
-              className="inline-flex h-9 w-9 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
+              className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
             >
               <Search size={18} strokeWidth={1.3} />
             </button>
             <Link
               href="/jewellery"
               aria-label="Account"
-              className="hidden h-9 w-9 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep sm:inline-flex"
+              className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
             >
               <User size={18} strokeWidth={1.3} />
             </Link>
             <button
               aria-label={`Wishlist${hydrated && wishCount ? `, ${wishCount} items` : ""}`}
               onClick={() => openOverlay("wishlist")}
-              className="relative inline-flex h-9 w-9 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
+              className="relative inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
             >
               <Heart size={18} strokeWidth={1.3} />
               {hydrated && wishCount > 0 && (
-                <span className="absolute right-0.5 top-0.5 grid h-3.5 w-3.5 place-items-center rounded-full bg-ink text-[0.5rem] font-semibold leading-none text-surface">
+                <span className="absolute right-1 top-1 grid h-3.5 w-3.5 place-items-center rounded-full bg-ink text-[0.5rem] font-semibold leading-none text-surface">
                   {wishCount}
                 </span>
               )}
@@ -111,11 +151,11 @@ export function Header() {
             <button
               aria-label={`Bag${hydrated && cartCount ? `, ${cartCount} items` : ""}`}
               onClick={() => openOverlay("cart")}
-              className="relative inline-flex h-9 w-9 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
+              className="relative inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
             >
               <ShoppingBag size={18} strokeWidth={1.3} />
               {hydrated && cartCount > 0 && (
-                <span className="absolute right-0.5 top-0.5 grid h-3.5 w-3.5 place-items-center rounded-full bg-ink text-[0.5rem] font-semibold leading-none text-surface">
+                <span className="absolute right-1 top-1 grid h-3.5 w-3.5 place-items-center rounded-full bg-ink text-[0.5rem] font-semibold leading-none text-surface">
                   {cartCount}
                 </span>
               )}

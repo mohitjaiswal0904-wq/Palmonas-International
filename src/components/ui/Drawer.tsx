@@ -68,7 +68,7 @@ export function Drawer({
             exit={{ x: side === "right" ? "100%" : "-100%" }}
             transition={{ duration: 0.5, ease: easeEditorial }}
           >
-            <div className="flex items-center justify-between border-b border-line px-6 py-5">
+            <div className="flex items-center justify-between border-b border-line px-5 py-4 pt-[max(1rem,env(safe-area-inset-top))] sm:px-6 sm:py-5">
               <div className="min-w-0">
                 {typeof title === "string" || title == null ? (
                   <h2 className="font-sans text-[0.72rem] font-semibold uppercase tracking-luxe text-ink">
@@ -81,12 +81,12 @@ export function Drawer({
               <button
                 onClick={onClose}
                 aria-label="Close"
-                className="text-ink-muted transition-colors hover:text-ink"
+                className="inline-flex h-11 w-11 items-center justify-center text-ink-muted transition-colors hover:text-ink"
               >
                 <X size={20} strokeWidth={1.3} />
               </button>
             </div>
-            <div className="scroll-thin flex-1 overflow-y-auto">{children}</div>
+            <div className="scroll-thin flex-1 overflow-y-auto pb-safe">{children}</div>
           </motion.div>
         </div>
       )}

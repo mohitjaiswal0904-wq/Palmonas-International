@@ -198,7 +198,7 @@ export function PlpView({
       {/* Category nav */}
       <nav
         aria-label="Categories"
-        className="scroll-thin -mx-5 mb-8 flex gap-6 overflow-x-auto border-b border-line px-5 sm:mx-0 sm:px-0"
+        className="scroll-thin -mx-5 mb-8 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-5 border-b border-line px-5 sm:mx-0 sm:snap-none sm:scroll-px-0 sm:px-0"
       >
         <CategoryTab href="/jewellery" active={!activeCategory} label="All" />
         {categories.map((c) => (
@@ -216,7 +216,7 @@ export function PlpView({
         <div className="flex items-center gap-4">
           <button
             onClick={() => openFilters("filters")}
-            className="flex items-center gap-2 font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink lg:hidden"
+            className="flex min-h-11 items-center gap-2 font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink lg:hidden"
           >
             <SlidersHorizontal size={15} strokeWidth={1.4} />
             Filter{activeCount ? ` (${activeCount})` : ""}
@@ -287,16 +287,16 @@ export function PlpView({
       {/* Mobile filter drawer */}
       <Drawer open={filtersOpen} onClose={closeFilters} side="left" title={`Filter${activeCount ? ` (${activeCount})` : ""}`}>
         <div className="px-6">{panel}</div>
-        <div className="sticky bottom-0 flex gap-3 border-t border-line bg-surface px-6 py-4">
+        <div className="sticky bottom-0 flex gap-3 border-t border-line bg-surface px-6 py-4 pb-safe-bar">
           <Button
             variant="ghost"
             size="sm"
-            className="flex-1"
+            className="min-h-11 flex-1"
             onClick={() => setFilters(emptyFilters(priceCeiling))}
           >
             Clear
           </Button>
-          <Button size="sm" className="flex-1" onClick={closeFilters}>
+          <Button size="sm" className="min-h-11 flex-1" onClick={closeFilters}>
             Show {filtered.length}
           </Button>
         </div>
@@ -318,7 +318,7 @@ function CategoryTab({
     <Link
       href={href}
       className={cn(
-        "-mb-px whitespace-nowrap border-b-2 pb-3 pt-1 font-sans text-[0.8rem] uppercase tracking-wide-sm transition-colors",
+        "snap-start -mb-px whitespace-nowrap border-b-2 pb-3 pt-1 font-sans text-[0.8rem] uppercase tracking-wide-sm transition-colors",
         active
           ? "border-ink text-ink"
           : "border-transparent text-ink-muted hover:text-ink",

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Star, Minus, Plus, Truck, ShieldCheck, CalendarDays, Check } from "lucide-react";
+import { Star, Truck, ShieldCheck, CalendarDays, Check } from "lucide-react";
 import type { Product } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { WishlistButton } from "@/components/product/WishlistButton";
@@ -21,7 +21,6 @@ export function ProductBuyPanel({ product }: { product: Product }) {
   const [metal, setMetal] = useState(product.metals[0]?.id);
   const [stone, setStone] = useState(product.stones[0]?.id);
   const [size, setSize] = useState(product.sizes[0]);
-  const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
 
   const money = useRegionalMoney();
@@ -31,7 +30,7 @@ export function ProductBuyPanel({ product }: { product: Product }) {
   const metalLabel = product.metals.find((m) => m.id === metal)?.label ?? "";
   const stoneLabel = product.stones.find((s) => s.id === stone)?.label;
 
-  const handleAdd = () => {
+  const addToBag = () => {
     add({
       productId: product.id,
       name: product.name,
@@ -45,20 +44,36 @@ export function ProductBuyPanel({ product }: { product: Product }) {
       image: product.images[0].src,
       seed: product.images[0].seed,
       plate: product.images[0].plate,
-      quantity: qty,
+      quantity: 1,
       giftWrap: false,
     });
+  };
+
+  const handleAdd = () => {
+    addToBag();
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
+    openCart("cart");
+  };
+
+  const handleBuyNow = () => {
+    addToBag();
     openCart("cart");
   };
 
   return (
     <div className="lg:sticky lg:top-28">
       <p className="eyebrow">{product.collectionLabel}</p>
-      <h1 className="mt-3 font-display text-4xl leading-tight text-ink sm:text-5xl">
-        {product.name}
-      </h1>
+      <div className="mt-3 flex items-start justify-between gap-3">
+        <h1 className="min-w-0 font-display text-[2rem] leading-tight text-ink sm:text-4xl lg:text-5xl">
+          {product.name}
+        </h1>
+        <WishlistButton
+          productId={product.id}
+          size={20}
+          className="mt-1 h-10 w-10 shrink-0 border border-line hover:border-ink lg:hidden"
+        />
+      </div>
 
       <div className="mt-4 flex items-center gap-3">
         <div className="flex items-center gap-0.5" aria-label={`Rated ${product.rating} out of 5`}>
@@ -99,15 +114,17 @@ export function ProductBuyPanel({ product }: { product: Product }) {
               aria-pressed={metal === m.id}
               aria-label={m.label}
               className={cn(
-                "flex items-center gap-2 border px-3 py-2 transition-colors",
-                metal === m.id ? "border-ink" : "border-line hover:border-line-strong",
+                "flex min-h-11 items-center gap-2 border px-3 py-2 text-ink transition-colors",
+                metal === m.id
+                  ? "border-ink ring-1 ring-ink"
+                  : "border-line hover:border-line-strong",
               )}
             >
               <span
                 className="h-4 w-4 rounded-full border border-line"
                 style={{ background: m.swatch }}
               />
-              <span className="font-sans text-[0.74rem] text-ink">{m.label.replace("18K ", "")}</span>
+              <span className="font-sans text-[0.74rem]">{m.label.replace("18K ", "")}</span>
             </button>
           ))}
         </div>
@@ -126,15 +143,17 @@ export function ProductBuyPanel({ product }: { product: Product }) {
                 onClick={() => setStone(s.id)}
                 aria-pressed={stone === s.id}
                 className={cn(
-                  "flex items-center gap-2 border px-3 py-2 transition-colors",
-                  stone === s.id ? "border-ink" : "border-line hover:border-line-strong",
+                  "flex min-h-11 items-center gap-2 border px-3 py-2 text-ink transition-colors",
+                  stone === s.id
+                    ? "border-ink ring-1 ring-ink"
+                    : "border-line hover:border-line-strong",
                 )}
               >
                 <span
                   className="h-4 w-4 rounded-full border border-line"
                   style={{ background: s.swatch }}
                 />
-                <span className="font-sans text-[0.74rem] text-ink">{s.label}</span>
+                <span className="font-sans text-[0.74rem]">{s.label}</span>
               </button>
             ))}
           </div>
@@ -159,7 +178,7 @@ export function ProductBuyPanel({ product }: { product: Product }) {
                 onClick={() => setSize(s)}
                 aria-pressed={size === s}
                 className={cn(
-                  "min-w-[3rem] border px-3 py-2 font-sans text-[0.78rem] transition-colors",
+                  "min-h-11 min-w-11 border px-3 py-2 font-sans text-[0.78rem] transition-colors",
                   size === s ? "border-ink bg-ink text-surface" : "border-line text-ink hover:border-line-strong",
                 )}
               >
@@ -170,26 +189,9 @@ export function ProductBuyPanel({ product }: { product: Product }) {
         </div>
       )}
 
-      {/* Quantity + add */}
-      <div className="mt-8 flex items-stretch gap-3">
-        <div className="flex items-center border border-line">
-          <button
-            aria-label="Decrease quantity"
-            onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="grid h-full w-11 place-items-center text-ink-muted hover:text-ink"
-          >
-            <Minus size={14} strokeWidth={1.5} />
-          </button>
-          <span className="w-8 text-center font-sans text-[0.85rem] text-ink">{qty}</span>
-          <button
-            aria-label="Increase quantity"
-            onClick={() => setQty((q) => q + 1)}
-            className="grid h-full w-11 place-items-center text-ink-muted hover:text-ink"
-          >
-            <Plus size={14} strokeWidth={1.5} />
-          </button>
-        </div>
-        <Button size="lg" className="flex-1" onClick={handleAdd}>
+      {/* Desktop CTAs — mobile uses sticky bottom bar */}
+      <div className="mt-8 hidden items-stretch gap-3 lg:flex">
+        <Button size="lg" variant="outline" className="min-h-12 flex-1" onClick={handleAdd}>
           <AnimatePresence mode="wait" initial={false}>
             {added ? (
               <motion.span
@@ -199,7 +201,7 @@ export function ProductBuyPanel({ product }: { product: Product }) {
                 exit={{ opacity: 0 }}
                 className="flex items-center gap-2"
               >
-                <Check size={15} strokeWidth={2} /> Added to bag
+                <Check size={15} strokeWidth={2} /> Added
               </motion.span>
             ) : (
               <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -207,6 +209,9 @@ export function ProductBuyPanel({ product }: { product: Product }) {
               </motion.span>
             )}
           </AnimatePresence>
+        </Button>
+        <Button size="lg" className="min-h-12 flex-1" onClick={handleBuyNow}>
+          Buy now
         </Button>
         <WishlistButton
           productId={product.id}
@@ -236,15 +241,18 @@ export function ProductBuyPanel({ product }: { product: Product }) {
       </ul>
 
       {/* Sticky mobile CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-line bg-ivory/95 px-5 py-3 backdrop-blur-md lg:hidden">
-        <div className="min-w-0">
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-line bg-ivory/95 px-4 pt-3 pb-safe-bar backdrop-blur-md sm:gap-3 sm:px-5 lg:hidden">
+        <div className="min-w-0 flex-1">
           <p className="truncate font-sans text-[0.78rem] text-ink">{product.name}</p>
           <p className="font-sans text-[0.78rem] text-ink-muted">
             {money(product.price)}
           </p>
         </div>
-        <Button size="md" className="shrink-0" onClick={handleAdd}>
-          {added ? "Added" : "Add to bag"}
+        <Button size="sm" variant="outline" className="shrink-0 px-3" onClick={handleAdd}>
+          {added ? "Added" : "Add"}
+        </Button>
+        <Button size="sm" className="shrink-0 px-3" onClick={handleBuyNow}>
+          Buy now
         </Button>
       </div>
     </div>

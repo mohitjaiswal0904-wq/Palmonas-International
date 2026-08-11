@@ -74,21 +74,21 @@ export function ProductCard({
       <div className="absolute right-2.5 top-2.5 z-10">
         <WishlistButton
           productId={product.id}
-          className="h-9 w-9 rounded-full bg-surface/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-visible:opacity-100"
+          className="h-10 w-10 rounded-full bg-surface/80 backdrop-blur-sm opacity-100 transition-opacity duration-300 lg:h-9 lg:w-9 lg:opacity-0 lg:group-hover:opacity-100 focus-visible:opacity-100"
           size={16}
         />
       </div>
 
-      <div className="mt-4 flex items-start justify-between gap-3">
+      <div className="mt-3 flex flex-col gap-1 sm:mt-4 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
         <div className="min-w-0">
-          <h3 className="truncate font-sans text-[0.86rem] font-medium text-ink">
+          <h3 className="truncate font-sans text-[0.82rem] font-medium text-ink sm:text-[0.86rem]">
             <Link href={href}>{product.name}</Link>
           </h3>
-          <p className="mt-0.5 truncate font-sans text-[0.74rem] text-ink-muted">
+          <p className="mt-0.5 truncate font-sans text-[0.72rem] text-ink-muted sm:text-[0.74rem]">
             {product.metals[0]?.label ?? product.categoryLabel}
           </p>
         </div>
-        <p className="whitespace-nowrap font-sans text-[0.82rem] text-ink">
+        <p className="font-sans text-[0.78rem] text-ink sm:whitespace-nowrap sm:text-[0.82rem]">
           {money(product.price)}
         </p>
       </div>

@@ -90,7 +90,7 @@ export function MobileNav() {
                           key={l.key}
                           href={l.href}
                           onClick={close}
-                          className="block py-1.5 font-sans text-[0.86rem] text-ink-muted transition-[color,transform] duration-300 ease-[var(--ease-editorial)] hover:translate-x-1 hover:text-ink"
+                          className="block py-2.5 font-sans text-[0.86rem] text-ink-muted transition-[color,transform] duration-300 ease-[var(--ease-editorial)] hover:translate-x-1 hover:text-ink"
                         >
                           {l.label}
                         </Link>
@@ -114,14 +114,14 @@ export function MobileNav() {
         <Link
           href="/jewellery"
           onClick={close}
-          className="block py-2 font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
+          className="block py-3 font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
         >
           Account
         </Link>
         <Link
           href="/collections"
           onClick={close}
-          className="block py-2 font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
+          className="block py-3 font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
         >
           Book an appointment
         </Link>

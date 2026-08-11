@@ -3,6 +3,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 const SIZES = {
+  xs: { width: 118, height: 12 },
   sm: { width: 148, height: 15 },
   md: { width: 188, height: 19 },
   lg: { width: 228, height: 23 },
@@ -38,7 +39,7 @@ export function Wordmark({
   href = "/",
 }: {
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   priority?: boolean;
   /** Pass `null` to render the mark without a link. */
   href?: string | null;

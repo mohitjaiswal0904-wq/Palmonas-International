@@ -15,8 +15,8 @@ export function AnnouncementBar() {
   }, []);
 
   return (
-    <div className="bg-ink text-surface">
-      <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-center overflow-hidden px-5">
+    <div className="bg-ink pt-safe text-surface">
+      <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-center overflow-hidden px-4 sm:px-5">
         <AnimatePresence mode="wait">
           <motion.p
             key={i}
@@ -24,7 +24,7 @@ export function AnnouncementBar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.4 }}
-            className="font-sans text-[0.62rem] font-medium uppercase tracking-luxe"
+            className="truncate text-center font-sans text-[0.58rem] font-medium uppercase tracking-[0.14em] sm:text-[0.62rem] sm:tracking-luxe"
           >
             {announcements[i]}
           </motion.p>

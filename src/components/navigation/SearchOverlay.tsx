@@ -79,14 +79,18 @@ export function SearchOverlay() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.5, ease: easeEditorial }}
-            className="absolute inset-x-0 top-0 max-h-[88vh] overflow-y-auto bg-ivory"
+            className="absolute inset-x-0 top-0 max-h-[88dvh] overflow-y-auto bg-ivory pt-safe"
           >
-            <Container className="py-8">
+            <Container className="py-6 pb-safe sm:py-8">
               <div className="mb-6 flex items-center justify-between">
                 <div onClick={close}>
                   <Wordmark size="sm" />
                 </div>
-                <button onClick={close} aria-label="Close search" className="text-ink-muted hover:text-ink">
+                <button
+                  onClick={close}
+                  aria-label="Close search"
+                  className="inline-flex h-11 w-11 items-center justify-center text-ink-muted hover:text-ink"
+                >
                   <X size={22} strokeWidth={1.3} />
                 </button>
               </div>

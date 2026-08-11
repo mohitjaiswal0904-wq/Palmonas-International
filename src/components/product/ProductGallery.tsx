@@ -12,9 +12,9 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
   const current = images[active];
 
   return (
-    <div className="lg:grid lg:grid-cols-[68px_1fr] lg:gap-3 lg:pl-3">
-      {/* Thumbnails — vertical on desktop */}
-      <div className="order-2 mt-3 flex gap-3 px-5 sm:px-8 lg:order-1 lg:mt-0 lg:flex-col lg:px-0">
+    <div className="flex flex-col lg:grid lg:grid-cols-[68px_1fr] lg:gap-3 lg:pl-3">
+      {/* Thumbnails — under main image on mobile, left rail on desktop */}
+      <div className="order-2 mt-3 flex gap-2.5 overflow-x-auto overscroll-x-contain px-5 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory sm:gap-3 sm:px-8 lg:order-1 lg:mt-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden">
         {images.map((img, i) => (
           <button
             key={img.seed}
@@ -22,7 +22,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             aria-label={`View ${img.alt}`}
             aria-current={i === active}
             className={cn(
-              "relative aspect-square w-16 shrink-0 overflow-hidden bg-stone transition-opacity lg:w-full",
+              "relative aspect-square w-16 shrink-0 snap-start overflow-hidden bg-stone transition-opacity lg:w-full",
               i === active ? "opacity-100 ring-1 ring-ink" : "opacity-60 hover:opacity-100",
             )}
           >

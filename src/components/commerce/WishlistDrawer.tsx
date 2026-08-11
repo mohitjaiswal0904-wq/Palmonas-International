@@ -70,7 +70,7 @@ export function WishlistDrawer() {
                     <button
                       aria-label={`Remove ${p!.name} from wishlist`}
                       onClick={() => remove(p!.id)}
-                      className="text-ink-muted hover:text-ink"
+                      className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-ink-muted hover:text-ink"
                     >
                       <X size={16} strokeWidth={1.4} />
                     </button>
@@ -105,7 +105,7 @@ export function WishlistDrawer() {
             ))}
           </div>
 
-          <div className="border-t border-line bg-surface px-6 py-6">
+          <div className="border-t border-line bg-surface px-6 py-6 pb-safe-bar">
             <p className="font-sans text-[0.78rem] text-ink-muted">
               Create an account to keep your wishlist across devices and share it with others.
             </p>

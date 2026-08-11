@@ -4,11 +4,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
 import { SectionHeading } from "@/components/editorial/SectionHeading";
 import { homeStyles } from "@/data";
+import { cn } from "@/lib/cn";
 
 export function ShopByStyle() {
   return (
     <section
-      className="border-t border-line py-24 sm:py-32"
+      className="border-t border-line py-16 sm:py-24 lg:py-32"
       aria-label="Shop by style"
     >
       <Container>
@@ -20,13 +21,13 @@ export function ShopByStyle() {
           />
         </Reveal>
 
-        <ul className="mt-12 flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-5 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden">
+        <ul className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 sm:mt-12 sm:gap-x-5 sm:gap-y-10 lg:grid-cols-5 lg:gap-5">
           {homeStyles.map((style, i) => (
             <Reveal
               key={style.id}
-              delay={i * 0.07}
+              delay={i * 0.05}
               as="li"
-              className="min-w-[68%] shrink-0 sm:min-w-[42%] lg:min-w-0"
+              className={cn(i === homeStyles.length - 1 && "max-sm:col-span-2")}
             >
               <Link href={style.href} className="group block">
                 <div className="relative aspect-[3/4] overflow-hidden bg-stone">
@@ -36,7 +37,7 @@ export function ShopByStyle() {
                       seed={style.seed}
                       kind="editorial"
                       alt={style.label}
-                      sizes="(max-width: 640px) 70vw, (max-width: 1024px) 42vw, 20vw"
+                      sizes="(max-width: 1024px) 50vw, 20vw"
                     />
                   </div>
                   <div
@@ -45,16 +46,16 @@ export function ShopByStyle() {
                   />
                 </div>
 
-                <div className="mt-5">
-                  <p className="font-display text-2xl text-ink transition-colors duration-500 group-hover:text-accent-deep">
+                <div className="mt-3 sm:mt-5">
+                  <p className="font-display text-xl text-ink transition-colors duration-500 group-hover:text-accent-deep sm:text-2xl">
                     {style.label}
                   </p>
-                  <p className="mt-1.5 font-sans text-[0.82rem] leading-snug text-ink-muted">
+                  <p className="mt-1 font-sans text-[0.76rem] leading-snug text-ink-muted sm:mt-1.5 sm:text-[0.82rem]">
                     {style.tagline}
                   </p>
                   <span
                     aria-hidden
-                    className="mt-3 block h-px w-6 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:scale-x-100"
+                    className="mt-2.5 hidden h-px w-6 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:scale-x-100 sm:mt-3 sm:block"
                   />
                 </div>
               </Link>

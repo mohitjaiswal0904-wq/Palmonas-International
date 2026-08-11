@@ -278,13 +278,13 @@ export default function HomePage() {
       </section>
 
       {/* 11 — Final brand moment */}
-      <section className="py-32 sm:py-44">
+      <section className="py-20 sm:py-32 lg:py-44">
         <Container width="narrow">
           <Reveal>
-            <div className="mb-10 flex justify-center">
+            <div className="mb-8 flex justify-center sm:mb-10">
               <Wordmark size="lg" href={null} />
             </div>
-            <p className="text-center font-display text-5xl leading-none text-ink sm:text-7xl">
+            <p className="text-center font-display text-4xl leading-none text-ink sm:text-5xl lg:text-7xl">
               Keep what matters.
             </p>
             <div className="mt-10 flex justify-center">

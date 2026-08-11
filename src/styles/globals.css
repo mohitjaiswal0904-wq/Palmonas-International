@@ -85,6 +85,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Safe-area helpers for notched phones */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pb-safe-bar {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
 /* Typographic rhythm helpers */
 .font-serif {
   font-family: var(--font-serif);

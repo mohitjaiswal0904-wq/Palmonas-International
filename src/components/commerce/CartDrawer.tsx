@@ -79,7 +79,7 @@ export function CartDrawer() {
                       <button
                         aria-label="Decrease quantity"
                         onClick={() => setQuantity(l.key, l.quantity - 1)}
-                        className="grid h-8 w-8 place-items-center text-ink-muted hover:text-ink"
+                        className="grid h-11 w-11 place-items-center text-ink-muted hover:text-ink"
                       >
                         <Minus size={13} strokeWidth={1.5} />
                       </button>
@@ -89,7 +89,7 @@ export function CartDrawer() {
                       <button
                         aria-label="Increase quantity"
                         onClick={() => setQuantity(l.key, l.quantity + 1)}
-                        className="grid h-8 w-8 place-items-center text-ink-muted hover:text-ink"
+                        className="grid h-11 w-11 place-items-center text-ink-muted hover:text-ink"
                       >
                         <Plus size={13} strokeWidth={1.5} />
                       </button>
@@ -145,7 +145,7 @@ export function CartDrawer() {
             )}
           </div>
 
-          <div className="border-t border-line bg-surface px-6 py-6">
+          <div className="border-t border-line bg-surface px-6 py-6 pb-safe-bar">
             <div className="flex items-center justify-between">
               <span className="font-sans text-[0.78rem] uppercase tracking-wide-sm text-ink-muted">
                 Subtotal
@@ -160,7 +160,7 @@ export function CartDrawer() {
             </Button>
             <button
               onClick={() => openOverlay("wishlist")}
-              className="mt-3 w-full text-center font-sans text-[0.72rem] uppercase tracking-wide-sm text-ink-muted hover:text-ink"
+              className="mt-3 min-h-11 w-full text-center font-sans text-[0.72rem] uppercase tracking-wide-sm text-ink-muted hover:text-ink"
             >
               View wishlist
             </button>

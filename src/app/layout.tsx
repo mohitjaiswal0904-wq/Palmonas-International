@@ -1,8 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Cormorant_Garamond, Manrope } from "next/font/google";
 import "@/styles/globals.css";
 import { SITE } from "@/lib/site";
 import { SiteChrome } from "@/components/layout/SiteChrome";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
