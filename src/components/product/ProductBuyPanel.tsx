@@ -248,10 +248,10 @@ export function ProductBuyPanel({ product }: { product: Product }) {
             {money(product.price)}
           </p>
         </div>
-        <Button size="sm" variant="outline" className="shrink-0 px-3" onClick={handleAdd}>
+        <Button size="sm" variant="outline" className="w-[5.75rem] shrink-0 px-2" onClick={handleAdd}>
           {added ? "Added" : "Add"}
         </Button>
-        <Button size="sm" className="shrink-0 px-3" onClick={handleBuyNow}>
+        <Button size="sm" className="w-[5.75rem] shrink-0 px-2" onClick={handleBuyNow}>
           Buy now
         </Button>
       </div>
