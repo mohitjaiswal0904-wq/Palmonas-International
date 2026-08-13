@@ -14,6 +14,7 @@ import { useHydrated } from "@/hooks/useHydrated";
 import { useUi } from "@/stores/ui";
 import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/stores/wishlist";
+import { useAccount } from "@/stores/account";
 import { easeEditorial } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
@@ -129,13 +130,16 @@ export function Header() {
             >
               <Search size={18} strokeWidth={1.3} />
             </button>
-            <Link
-              href="/jewellery"
+            <button
               aria-label="Account"
+              onClick={() => {
+                useAccount.getState().setPendingMode("signin");
+                openOverlay("account");
+              }}
               className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-accent-deep"
             >
               <User size={18} strokeWidth={1.3} />
-            </Link>
+            </button>
             <button
               aria-label={`Wishlist${hydrated && wishCount ? `, ${wishCount} items` : ""}`}
               onClick={() => openOverlay("wishlist")}

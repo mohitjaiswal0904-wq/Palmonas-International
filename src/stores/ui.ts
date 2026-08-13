@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type Overlay = "search" | "cart" | "wishlist" | "menu" | "filters" | null;
+type Overlay = "search" | "cart" | "wishlist" | "menu" | "filters" | "account" | null;
 
 type UiState = {
   overlay: Overlay;

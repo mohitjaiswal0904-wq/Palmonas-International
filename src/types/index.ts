@@ -29,3 +29,12 @@ export type {
   HomeCategory,
   HomeStyle,
 } from "./content";
+
+export type {
+  OrderStatus,
+  OrderLine,
+  OrderAddress,
+  OrderTimelineEvent,
+  Order,
+  SavedAddress,
+} from "./account";

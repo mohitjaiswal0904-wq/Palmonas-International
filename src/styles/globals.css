@@ -75,6 +75,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -82,7 +84,14 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv01";
-  overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+#main {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* Safe-area helpers for notched phones */

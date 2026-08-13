@@ -9,11 +9,13 @@ import { Wordmark } from "@/components/layout/Wordmark";
 import { RegionSwitcher } from "@/components/layout/RegionSwitcher";
 import { primaryNav } from "@/data";
 import { useUi } from "@/stores/ui";
+import { useAccount } from "@/stores/account";
 import { easeOutSoft } from "@/lib/motion";
 
 export function MobileNav() {
   const overlay = useUi((s) => s.overlay);
   const close = useUi((s) => s.close);
+  const openOverlay = useUi((s) => s.open);
   const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
@@ -50,7 +52,7 @@ export function MobileNav() {
                 <Link
                   href={entry.href}
                   onClick={close}
-                  className="flex-1 py-4 font-sans text-[1.05rem] text-ink"
+                  className="flex-1 py-4 font-sans text-[0.95rem] text-ink"
                 >
                   {entry.label}
                 </Link>
@@ -111,13 +113,16 @@ export function MobileNav() {
           </span>
           <RegionSwitcher />
         </div>
-        <Link
-          href="/jewellery"
-          onClick={close}
-          className="block py-3 font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
+        <button
+          type="button"
+          onClick={() => {
+            useAccount.getState().setPendingMode("signin");
+            openOverlay("account");
+          }}
+          className="block w-full py-3 text-left font-sans text-[0.8rem] uppercase tracking-wide-sm text-ink-muted"
         >
           Account
-        </Link>
+        </button>
         <Link
           href="/collections"
           onClick={close}

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { useUi } from "@/stores/ui";
 import { useWishlist } from "@/stores/wishlist";
 import { useCart } from "@/stores/cart";
+import { useAccount } from "@/stores/account";
 import { useHydrated } from "@/hooks/useHydrated";
 import { productById } from "@/data";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
@@ -15,8 +16,11 @@ import { useRegionalMoney } from "@/hooks/useRegionalMoney";
 export function WishlistDrawer() {
   const open = useUi((s) => s.overlay === "wishlist");
   const close = useUi((s) => s.close);
+  const openOverlay = useUi((s) => s.open);
   const hydrated = useHydrated();
   const money = useRegionalMoney();
+  const user = useAccount((s) => s.user);
+  const setPendingMode = useAccount((s) => s.setPendingMode);
 
   const ids = useWishlist((s) => s.ids);
   const remove = useWishlist((s) => s.remove);
@@ -26,7 +30,12 @@ export function WishlistDrawer() {
   const isEmpty = hydrated && items.length === 0;
 
   return (
-    <Drawer open={open} onClose={close} title="Wishlist">
+    <Drawer
+      open={open}
+      onClose={close}
+      title="Wishlist"
+      widthClass="w-[calc(100%-1.25rem)] max-w-[440px]"
+    >
       {!hydrated ? null : isEmpty ? (
         <div className="flex h-full flex-col items-center justify-center px-8 text-center">
           <Heart size={28} strokeWidth={1} className="text-ink-faint" />
@@ -106,17 +115,48 @@ export function WishlistDrawer() {
           </div>
 
           <div className="border-t border-line bg-surface px-6 py-6 pb-safe-bar">
-            <p className="font-sans text-[0.78rem] text-ink-muted">
-              Create an account to keep your wishlist across devices and share it with others.
-            </p>
-            <div className="mt-4 flex gap-3">
-              <Button variant="outline" size="sm" className="flex-1">
-                Create account
-              </Button>
-              <Button variant="ghost" size="sm" className="flex-1">
-                Share wishlist
-              </Button>
-            </div>
+            {user ? (
+              <p className="font-sans text-[0.78rem] text-ink-muted">
+                Signed in as {user.email}. Your wishlist is saved on this device.
+              </p>
+            ) : (
+              <>
+                <p className="font-sans text-[0.78rem] text-ink-muted">
+                  Create an account to keep your wishlist across devices and share it with others.
+                </p>
+                <div className="mt-4 flex gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => {
+                      setPendingMode("register");
+                      openOverlay("account");
+                    }}
+                  >
+                    Create account
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => {
+                      if (typeof navigator !== "undefined" && navigator.share) {
+                        void navigator.share({
+                          title: "My Palmonas wishlist",
+                          text: "Pieces I've saved at Palmonas International",
+                          url: typeof window !== "undefined" ? window.location.origin : undefined,
+                        });
+                      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
+                        void navigator.clipboard.writeText(window.location.origin);
+                      }
+                    }}
+                  >
+                    Share wishlist
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

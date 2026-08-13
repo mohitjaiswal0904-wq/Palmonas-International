@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SearchOverlay } from "@/components/navigation/SearchOverlay";
 import { CartDrawer } from "@/components/commerce/CartDrawer";
 import { WishlistDrawer } from "@/components/commerce/WishlistDrawer";
+import { AccountDrawer } from "@/components/commerce/AccountDrawer";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
@@ -23,6 +24,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <SearchOverlay />
       <CartDrawer />
       <WishlistDrawer />
+      <AccountDrawer />
     </>
   );
 }

@@ -29,7 +29,12 @@ export function CartDrawer() {
   const suggestion = bestSellers()[0];
 
   return (
-    <Drawer open={open} onClose={close} title="Your Bag">
+    <Drawer
+      open={open}
+      onClose={close}
+      title="Your Bag"
+      widthClass="w-[calc(100%-1.25rem)] max-w-[440px]"
+    >
       {!hydrated ? null : isEmpty ? (
         <div className="flex h-full flex-col items-center justify-center px-8 text-center">
           <ShoppingBag size={28} strokeWidth={1} className="text-ink-faint" />

@@ -42,6 +42,20 @@ export {
 export type { Region } from "./commerce/regions";
 export { featuredStores } from "./commerce/stores";
 export type { Store } from "./commerce/stores";
+export {
+  demoOrders,
+  demoAddresses,
+  orderById,
+  formatOrderDate,
+  formatOrderDateTime,
+} from "./commerce/orders";
+export type {
+  Order,
+  OrderLine,
+  OrderStatus,
+  SavedAddress,
+} from "@/types/account";
+export { ORDER_STATUS_LABEL } from "@/types/account";
 
 // Generated imagery (also available via @/data/generated/imagery)
 export { CATEGORY_IMAGERY, BANNERS, ALL_BANNERS } from "./generated/imagery";
