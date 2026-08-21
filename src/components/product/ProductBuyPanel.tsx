@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Star, Truck, ShieldCheck, CalendarDays, Check } from "lucide-react";
 import type { Product } from "@/types";
@@ -56,49 +57,53 @@ export function ProductBuyPanel({ product }: { product: Product }) {
     openCart("cart");
   };
 
-  const handleBuyNow = () => {
+  /** Opens the bag after add — no checkout route in this prototype. */
+  const handleAddAndViewBag = () => {
     addToBag();
     openCart("cart");
   };
 
   return (
     <div className="lg:sticky lg:top-28">
-      <p className="eyebrow">{product.collectionLabel}</p>
-      <div className="mt-3 flex items-start justify-between gap-3">
-        <h1 className="min-w-0 font-display text-[2rem] leading-tight text-ink sm:text-4xl lg:text-5xl">
-          {product.name}
-        </h1>
+      <div className="flex items-center justify-between gap-3">
+        <p className="eyebrow">{product.collectionLabel}</p>
         <WishlistButton
           productId={product.id}
           size={20}
-          className="mt-1 h-10 w-10 shrink-0 border border-line hover:border-ink lg:hidden"
+          className="h-9 w-9 shrink-0 lg:hidden"
         />
       </div>
 
-      <div className="mt-4 flex items-center gap-3">
-        <div className="flex items-center gap-0.5" aria-label={`Rated ${product.rating} out of 5`}>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              size={13}
-              strokeWidth={1.2}
-              className={cn(
-                i < Math.round(product.rating) ? "fill-ink text-ink" : "text-line-strong",
-              )}
-            />
-          ))}
+      {/* Full title on desktop; screen-reader only on mobile (sticky bar shows it visually) */}
+      <h1 className="mt-3 min-w-0 font-display text-[2rem] leading-tight text-ink max-lg:sr-only sm:text-4xl lg:text-5xl">
+        {product.name}
+      </h1>
+
+      {product.reviewCount > 0 ? (
+        <div className="mt-4 flex items-center gap-3">
+          <div
+            className="flex items-center gap-0.5"
+            aria-label={`Rated ${product.rating} out of 5`}
+          >
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                size={13}
+                strokeWidth={1.2}
+                className={cn(
+                  i < Math.round(product.rating) ? "fill-ink text-ink" : "text-line-strong",
+                )}
+              />
+            ))}
+          </div>
+          <span className="font-sans text-[0.76rem] text-ink-muted">
+            {product.rating.toFixed(1)} · {product.reviewCount} reviews
+          </span>
         </div>
-        <span className="font-sans text-[0.76rem] text-ink-muted">
-          {product.rating.toFixed(1)} · {product.reviewCount} reviews
-        </span>
-      </div>
+      ) : null}
 
-      <p className="mt-5 font-sans text-2xl font-normal tracking-tight text-ink">
+      <p className="mt-5 hidden font-sans text-2xl font-normal tracking-tight text-ink lg:block">
         {money(product.price)}
-      </p>
-
-      <p className="mt-5 max-w-[46ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-        {product.description}
       </p>
 
       {/* Metal */}
@@ -167,9 +172,12 @@ export function ProductBuyPanel({ product }: { product: Product }) {
             <p className="eyebrow">
               Size — <span className="text-ink">{size}</span>
             </p>
-            <button className="link-underline font-sans text-[0.72rem] text-ink-muted">
+            <Link
+              href="/size-guide"
+              className="link-underline font-sans text-[0.72rem] text-ink-muted"
+            >
               Size guide
-            </button>
+            </Link>
           </div>
           <div className="flex flex-wrap gap-2">
             {product.sizes.map((s) => (
@@ -210,8 +218,8 @@ export function ProductBuyPanel({ product }: { product: Product }) {
             )}
           </AnimatePresence>
         </Button>
-        <Button size="lg" className="min-h-12 flex-1" onClick={handleBuyNow}>
-          Buy now
+        <Button size="lg" className="min-h-12 flex-1" onClick={handleAddAndViewBag}>
+          Add & view bag
         </Button>
         <WishlistButton
           productId={product.id}
@@ -240,19 +248,21 @@ export function ProductBuyPanel({ product }: { product: Product }) {
         </li>
       </ul>
 
-      {/* Sticky mobile CTA */}
+      {/* Sticky mobile CTA — name + price live here on small screens */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-line bg-ivory/95 px-4 pt-3 pb-safe-bar backdrop-blur-md sm:gap-3 sm:px-5 lg:hidden">
-        <div className="min-w-0 flex-1">
-          <p className="truncate font-sans text-[0.78rem] text-ink">{product.name}</p>
-          <p className="font-sans text-[0.78rem] text-ink-muted">
+        <div className="min-w-0 flex-1" aria-hidden="true">
+          <p className="truncate font-sans text-[0.8rem] font-medium leading-snug text-ink">
+            {product.name}
+          </p>
+          <p className="mt-0.5 font-sans text-[0.8rem] tabular-nums text-ink-muted">
             {money(product.price)}
           </p>
         </div>
         <Button size="sm" variant="outline" className="w-[5.75rem] shrink-0 px-2" onClick={handleAdd}>
           {added ? "Added" : "Add"}
         </Button>
-        <Button size="sm" className="w-[5.75rem] shrink-0 px-2" onClick={handleBuyNow}>
-          Buy now
+        <Button size="sm" className="w-[5.75rem] shrink-0 px-2" onClick={handleAddAndViewBag}>
+          View bag
         </Button>
       </div>
     </div>

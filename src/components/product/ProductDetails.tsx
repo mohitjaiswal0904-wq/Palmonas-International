@@ -46,7 +46,7 @@ export function ProductDetails({ product }: { product: Product }) {
   ];
 
   return (
-    <section className="border-t border-line py-16 sm:py-24">
+    <section className="border-t border-line py-12 sm:py-16 lg:py-24">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-0 xl:gap-x-24">
           {/* Lead + key facts — left rail */}

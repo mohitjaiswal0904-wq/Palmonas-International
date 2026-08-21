@@ -3,7 +3,7 @@ import { BANNERS, CATEGORY_IMAGERY } from "@/data/generated/imagery";
 
 /**
  * Homepage category strip — images resolve from generated catalogue photography.
- * Marketing buckets (mangalsutras, mens) map onto existing category routes.
+ * Marketing buckets use live catalogue queries (not empty category routes).
  */
 export const homeCategories: HomeCategory[] = [
   {
@@ -37,14 +37,14 @@ export const homeCategories: HomeCategory[] = [
   {
     id: "mangalsutras",
     label: "Mangalsutras",
-    href: "/jewellery/necklaces",
+    href: "/jewellery?q=mangalsutra",
     image: BANNERS.story,
     seed: "home-circle-mangalsutras",
   },
   {
     id: "mens",
     label: "Mens",
-    href: "/jewellery/bracelets",
+    href: "/jewellery?q=ball+chain",
     image: BANNERS.collection,
     seed: "home-circle-mens",
   },
@@ -56,43 +56,51 @@ export const homeCategories: HomeCategory[] = [
  */
 export const homeStyles: HomeStyle[] = [
   {
-    id: "everyday",
-    label: "Everyday",
-    tagline: "Pieces you never take off",
+    id: "essential",
+    label: "Essential",
+    tagline: "Everyday silver, refined",
     href: "/collections/essential",
-    image: BANNERS.collection,
-    seed: "home-style-everyday",
-  },
-  {
-    id: "after-dark",
-    label: "After dark",
-    tagline: "Composed for low light",
-    href: "/collections/nocturne",
-    image: BANNERS.story,
-    seed: "home-style-after-dark",
-  },
-  {
-    id: "soft-gold",
-    label: "Soft gold",
-    tagline: "Warmth, cast in gold",
-    href: "/collections/aurelia",
-    image: BANNERS.personalisation,
-    seed: "home-style-soft-gold",
-  },
-  {
-    id: "sculptural",
-    label: "Sculptural",
-    tagline: "Architecture for the body",
-    href: "/collections/sculpted",
-    image: BANNERS.signature,
-    seed: "home-style-sculptural",
-  },
-  {
-    id: "in-motion",
-    label: "In motion",
-    tagline: "Fluid lines that move",
-    href: "/collections/elan",
     image: BANNERS.hero,
-    seed: "home-style-in-motion",
+    seed: "home-style-essential",
+  },
+  {
+    id: "ode-to-nature",
+    label: "Ode To Nature",
+    tagline: "Insects & blooms in silver",
+    href: "/collections/ode-to-nature",
+    image: BANNERS.collection,
+    seed: "home-style-ode-to-nature",
+  },
+  {
+    id: "9kt-fine-gold",
+    label: "9KT Fine Gold",
+    tagline: "Solid gold, lab diamonds",
+    href: "/collections/9kt-fine-gold",
+    image: BANNERS.story,
+    seed: "home-style-9kt-fine-gold",
+  },
+  {
+    id: "rings",
+    label: "Nature rings",
+    tagline: "Ladybugs, moths & beetles",
+    href: "/jewellery/rings",
+    image: BANNERS.personalisation,
+    seed: "home-style-rings",
+  },
+  {
+    id: "earrings",
+    label: "Nature earrings",
+    tagline: "Wings, hoops & earcuffs",
+    href: "/jewellery/earrings",
+    image: BANNERS.personalisation,
+    seed: "home-style-earrings",
+  },
+  {
+    id: "new",
+    label: "New arrivals",
+    tagline: "Fresh arrivals",
+    href: "/jewellery?sort=new",
+    image: BANNERS.signature,
+    seed: "home-style-new",
   },
 ];

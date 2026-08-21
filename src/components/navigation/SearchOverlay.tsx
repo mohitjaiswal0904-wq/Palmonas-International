@@ -120,15 +120,22 @@ export function SearchOverlay() {
                 <Search size={18} strokeWidth={1.3} className="shrink-0 text-ink-muted" aria-hidden />
                 <input
                   ref={inputRef}
+                  id="site-search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search jewellery, collections, materials"
-                  aria-label="Search"
+                  aria-label="Search jewellery"
                   autoComplete="off"
                   spellCheck={false}
                   enterKeyHint="search"
                   className="w-full min-h-[1.75rem] bg-transparent font-sans text-[0.95rem] leading-normal text-ink caret-ink placeholder:text-ink-faint outline-none focus:outline-none focus-visible:!outline-none focus-visible:!outline-offset-0 sm:min-h-[2rem]"
                 />
+                <kbd
+                  className="hidden shrink-0 border border-line px-1.5 py-0.5 font-sans text-[0.62rem] uppercase tracking-wide-sm text-ink-faint sm:inline"
+                  aria-hidden
+                >
+                  Esc
+                </kbd>
                 <button type="submit" className="sr-only">
                   Search
                 </button>

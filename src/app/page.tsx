@@ -19,7 +19,10 @@ const arrivals = [...newArrivals(), ...bestSellers()]
   .filter((p, i, arr) => arr.findIndex((x) => x.id === p.id) === i)
   .slice(0, 5);
 
-const signaturePieces = productsByCollection("signature").slice(0, 3);
+/** Featured home collection — use a live catalogue only (empty shells 404). */
+const FEATURED_COLLECTION = "9kt-fine-gold" as const;
+const featuredPieces = productsByCollection(FEATURED_COLLECTION).slice(0, 3);
+const featuredHref = `/collections/${FEATURED_COLLECTION}`;
 
 export default function HomePage() {
   return (
@@ -85,19 +88,19 @@ export default function HomePage() {
       {/* 03b — Shop by style */}
       <ShopByStyle />
 
-      {/* 04 — Signature collection editorial */}
+      {/* 04 — Featured live collection editorial */}
       <section className="pb-24 pt-10 sm:pb-32 sm:pt-14">
         <Container>
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-6">
             <Reveal className="lg:col-span-8" as="div">
-              <Link href="/collections/signature" className="group block">
+              <Link href={featuredHref} className="group block">
                 <div className="relative aspect-[16/11] overflow-hidden bg-stone">
                   <div className="absolute inset-0 transition-transform duration-[1100ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]">
                     <Media
                       src={BANNERS.signature}
-                      seed="home-signature-hero"
+                      seed="home-9kt-hero"
                       kind="editorial"
-                      alt="The Signature Collection campaign"
+                      alt="9KT Fine Gold collection campaign"
                       sizes="(max-width: 1024px) 100vw, 66vw"
                       priority
                     />
@@ -107,19 +110,19 @@ export default function HomePage() {
             </Reveal>
             <div className="flex flex-col justify-end lg:col-span-4">
               <Reveal delay={0.1}>
-                <p className="eyebrow mb-4">The Signature Collection</p>
+                <p className="eyebrow mb-4">9KT Fine Gold</p>
                 <h2 className="font-display text-4xl leading-tight text-ink">
                   Our most considered work
                 </h2>
                 <p className="mt-5 max-w-[40ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  Limited in number, exceptional in stone and finish. The pieces
-                  we make when nothing is left to chance — intended to be a first
-                  acquisition, then an inheritance.
+                  Solid 9KT gold with laboratory-grown diamonds — refined forms
+                  for everyday wear and lasting occasions. The pieces we make
+                  when finish and stone quality leave nothing to chance.
                 </p>
               </Reveal>
-              {signaturePieces[0] && (
+              {featuredPieces[0] && (
                 <Reveal delay={0.2} className="mt-10 grid grid-cols-2 gap-4">
-                  {signaturePieces.slice(0, 2).map((p) => (
+                  {featuredPieces.slice(0, 2).map((p) => (
                     <Link
                       key={p.id}
                       href={`/jewellery/${p.category}/${p.slug}`}
@@ -142,7 +145,7 @@ export default function HomePage() {
                 </Reveal>
               )}
               <Reveal delay={0.25}>
-                <ButtonLink href="/collections/signature" variant="outline" className="mt-8 w-fit">
+                <ButtonLink href={featuredHref} variant="outline" className="mt-8 w-fit">
                   View the collection
                 </ButtonLink>
               </Reveal>
@@ -215,7 +218,7 @@ export default function HomePage() {
                   shoulder, so each piece catches a single point of light and
                   holds it. Restraint, rendered nocturnal.
                 </p>
-                <ButtonLink href="/collections/nocturne" variant="outline" className="mt-8">
+                <ButtonLink href="/collections/ode-to-nature" variant="outline" className="mt-8">
                   Discover the story
                 </ButtonLink>
               </Reveal>
@@ -252,24 +255,23 @@ export default function HomePage() {
             </Reveal>
             <div>
               <Reveal>
-                <p className="eyebrow mb-4">Make it yours</p>
+                <p className="eyebrow mb-4">Gifting</p>
                 <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
-                  A piece, made personal
+                  Pieces worth giving
                 </h2>
                 <p className="mt-6 max-w-[42ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  Hand-engrave initials, a date or a coordinate. Set a birthstone.
-                  Begin a charm story that grows with you. The smallest details
-                  are what make a piece unmistakably yours.
+                  From fine silver essentials to solid 9KT gold — choose a piece
+                  that feels considered, ready to wear from the first day.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-                  {["Engraving", "Initials", "Birthstones", "Custom pieces"].map((t) => (
+                  {["Bestsellers", "9KT Gold", "Silver essentials", "Mangalsutras"].map((t) => (
                     <span key={t} className="font-sans text-[0.82rem] text-ink">
                       {t}
                     </span>
                   ))}
                 </div>
-                <ButtonLink href="/jewellery/charms" className="mt-9">
-                  Begin personalisation
+                <ButtonLink href="/jewellery?sort=bestsellers" className="mt-9">
+                  Explore gift-ready pieces
                 </ButtonLink>
               </Reveal>
             </div>

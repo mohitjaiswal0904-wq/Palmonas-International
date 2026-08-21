@@ -2,8 +2,9 @@
  * Domain glossary — import from `@/types`.
  *
  * - catalog: products, categories, collections, imagery shapes
- * - commerce: regions, stores
- * - content: navigation, homepage marketing
+ * - commerce: regions, retail boutiques
+ * - content: navigation, homepage, info/footer page shapes
+ * - account: orders, addresses
  */
 
 export type {
@@ -28,6 +29,11 @@ export type {
   NavEntry,
   HomeCategory,
   HomeStyle,
+  InfoBlock,
+  InfoPage,
+  FooterLink,
+  FooterBlock,
+  FooterFaq,
 } from "./content";
 
 export type {
@@ -38,3 +44,5 @@ export type {
   Order,
   SavedAddress,
 } from "./account";
+
+export { ORDER_STATUS_LABEL } from "./account";

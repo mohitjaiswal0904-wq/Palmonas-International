@@ -10,11 +10,14 @@ import { bannerFor } from "@/lib/banners";
 export const metadata: Metadata = {
   title: "Collections",
   description:
-    "Explore the Palmonas International collections — Essential, Nocturne, Aurelia, Sculpted, Élan and the Signature Collection.",
+    "Explore live Palmonas International collections — Ode To Nature and 9KT Fine Gold.",
   alternates: { canonical: "/collections" },
 };
 
 export default function CollectionsPage() {
+  // Only show collections that have products after enrichment.
+  const live = collections.filter((c) => c.productIds.length > 0);
+
   return (
     <Container className="pt-10 pb-24">
       <Breadcrumbs items={[{ label: "Collections", href: "/collections" }]} />
@@ -30,7 +33,7 @@ export default function CollectionsPage() {
       </header>
 
       <div className="grid gap-x-6 gap-y-16 md:grid-cols-2">
-        {collections.map((c, i) => (
+        {live.map((c, i) => (
           <Reveal key={c.id} delay={(i % 2) * 0.08} as="article">
             <Link href={`/collections/${c.slug}`} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden bg-stone">

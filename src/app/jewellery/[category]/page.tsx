@@ -6,8 +6,13 @@ import { PlpView } from "@/components/product/PlpView";
 import { categories, categoryBySlug, productsByCategory } from "@/data";
 import type { CategorySlug } from "@/types";
 
+/** Only categories with catalogue products are routable. */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return categories.map((c) => ({ category: c.slug }));
+  return categories
+    .filter((c) => productsByCategory(c.slug).length > 0)
+    .map((c) => ({ category: c.slug }));
 }
 
 export async function generateMetadata({
@@ -35,6 +40,7 @@ export default async function CategoryPage({
   if (!cat) notFound();
 
   const items = productsByCategory(cat.slug);
+  if (items.length === 0) notFound();
 
   return (
     <Container className="pt-10 pb-24">

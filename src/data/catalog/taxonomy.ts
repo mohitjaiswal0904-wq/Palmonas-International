@@ -18,6 +18,8 @@ export const COLLECTION_LABELS: Record<CollectionSlug, string> = {
   sculpted: "Sculpted",
   elan: "Élan",
   signature: "The Signature Collection",
+  "ode-to-nature": "Ode To Nature",
+  "9kt-fine-gold": "9KT Fine Gold",
 };
 
 /**
@@ -28,6 +30,9 @@ export const COLLECTION_NAV_ALIASES: Record<string, CollectionSlug> = {
   "emily-in-paris": "elan",
   "shraddhas-favourite": "signature",
   "tanya-ghavri": "aurelia",
+  "ode-to-nature": "ode-to-nature",
+  "9kt-fine-gold": "9kt-fine-gold",
+  "gold-jewellery": "9kt-fine-gold",
 };
 
 export function categoryLabel(slug: CategorySlug): string {

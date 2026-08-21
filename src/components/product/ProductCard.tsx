@@ -30,8 +30,8 @@ export function ProductCard({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Link href={href} className="block">
-        <div className="relative aspect-square overflow-hidden bg-stone">
+      <div className="relative aspect-square overflow-hidden bg-stone">
+        <Link href={href} className="absolute inset-0 block">
           <div
             className={cn(
               "absolute inset-0 transition-all duration-[900ms] ease-[var(--ease-editorial)]",
@@ -62,21 +62,21 @@ export function ProductCard({
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
           </div>
+        </Link>
 
-          {badge && (
-            <span className="absolute left-3 top-3 z-10 font-sans text-[0.58rem] font-semibold uppercase tracking-luxe text-ink">
-              {badge === "BESTSELLER" ? "Best Seller" : badge === "NEW" ? "New" : badge === "LIMITED" ? "Limited" : "Exclusive"}
-            </span>
-          )}
+        {badge && (
+          <span className="pointer-events-none absolute left-3 top-3 z-10 font-sans text-[0.58rem] font-semibold uppercase tracking-luxe text-ink">
+            {badge === "BESTSELLER" ? "Best Seller" : badge === "NEW" ? "New" : badge === "LIMITED" ? "Limited" : "Exclusive"}
+          </span>
+        )}
+
+        <div className="absolute right-3 top-3 z-10">
+          <WishlistButton
+            productId={product.id}
+            className="opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100 focus-visible:opacity-100"
+            size={18}
+          />
         </div>
-      </Link>
-
-      <div className="absolute right-2.5 top-2.5 z-10">
-        <WishlistButton
-          productId={product.id}
-          className="h-10 w-10 rounded-full bg-surface/80 backdrop-blur-sm opacity-100 transition-opacity duration-300 lg:h-9 lg:w-9 lg:opacity-0 lg:group-hover:opacity-100 focus-visible:opacity-100"
-          size={16}
-        />
       </div>
 
       <div className="mt-3 flex flex-col gap-1 sm:mt-4 sm:flex-row sm:items-start sm:justify-between sm:gap-3">

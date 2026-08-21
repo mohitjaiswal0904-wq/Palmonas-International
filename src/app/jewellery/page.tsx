@@ -2,30 +2,17 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { PlpView } from "@/components/product/PlpView";
-import { products } from "@/data";
+import { products, CATALOG_METALS, CATALOG_STONES } from "@/data";
 import { filterProductsByQuery } from "@/lib/search";
 
 export const metadata: Metadata = {
   title: "Jewellery",
   description:
-    "Explore the full Palmonas International collection — rings, necklaces, earrings, bracelets, bangles and charms in 18k gold and platinum.",
+    "Explore Ode To Nature and 9KT Fine Gold — sterling silver and solid gold jewellery from Palmonas International.",
   alternates: { canonical: "/jewellery" },
 };
 
 type SortKey = "featured" | "new" | "price-asc" | "price-desc" | "bestsellers";
-
-const METAL_LABEL: Record<string, string> = {
-  yellow: "18K Yellow Gold",
-  white: "18K White Gold",
-  rose: "18K Rose Gold",
-  platinum: "Platinum",
-};
-const STONE_LABEL: Record<string, string> = {
-  diamond: "Diamond",
-  sapphire: "Sapphire",
-  emerald: "Emerald",
-  ruby: "Ruby",
-};
 
 export default async function JewelleryPage({
   searchParams,
@@ -41,8 +28,10 @@ export default async function JewelleryPage({
         ? "bestsellers"
         : "featured";
 
-  const initialMetals = metal && METAL_LABEL[metal] ? [METAL_LABEL[metal]] : [];
-  const initialStones = stone && STONE_LABEL[stone] ? [STONE_LABEL[stone]] : [];
+  const metalLabel = metal ? CATALOG_METALS[metal as keyof typeof CATALOG_METALS]?.label : undefined;
+  const stoneLabel = stone ? CATALOG_STONES[stone as keyof typeof CATALOG_STONES]?.label : undefined;
+  const initialMetals = metalLabel ? [metalLabel] : [];
+  const initialStones = stoneLabel ? [stoneLabel] : [];
   const listed = filterProductsByQuery(products, query);
 
   return (

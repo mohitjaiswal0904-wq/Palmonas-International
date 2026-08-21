@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { SlidersHorizontal } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import type { Product } from "@/types";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Drawer } from "@/components/ui/Drawer";
@@ -13,9 +14,10 @@ import {
   type FilterState,
   emptyFilters,
 } from "@/components/product/FilterControls";
-import { categories, collections } from "@/data";
+import { categories, collections, CATALOG_METALS, CATALOG_STONES } from "@/data";
 import { useRegionalMoney } from "@/hooks/useRegionalMoney";
 import { useUi } from "@/stores/ui";
+import { easeOutSoft } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 type SortKey = "featured" | "new" | "price-asc" | "price-desc" | "bestsellers";
@@ -34,19 +36,14 @@ const AVAILABILITY = [
   { id: "low-stock", label: "Low stock" },
 ];
 
-const METALS = [
-  { id: "18K Yellow Gold", label: "18K Yellow Gold", swatch: "#c9a95f" },
-  { id: "18K White Gold", label: "18K White Gold", swatch: "#dcdcdc" },
-  { id: "18K Rose Gold", label: "18K Rose Gold", swatch: "#d8a48a" },
-  { id: "Platinum", label: "Platinum", swatch: "#c7c9cc" },
-];
+/** Filter chips use metal/stone *labels* (match Product.metals[].label). */
+const METALS = Object.values(CATALOG_METALS)
+  .filter((m) => m.id !== "platinum")
+  .map((m) => ({ id: m.label, label: m.label, swatch: m.swatch }));
 
-const STONES = [
-  { id: "Diamond", label: "Diamond", swatch: "#eef1f4" },
-  { id: "Sapphire", label: "Sapphire", swatch: "#2a4a7a" },
-  { id: "Emerald", label: "Emerald", swatch: "#2f5d4a" },
-  { id: "Ruby", label: "Ruby", swatch: "#7a2233" },
-];
+const STONES = Object.values(CATALOG_STONES)
+  .filter((s) => s.id !== "none" && s.id !== "sapphire" && s.id !== "emerald" && s.id !== "ruby")
+  .map((s) => ({ id: s.label, label: s.label, swatch: s.swatch }));
 
 function toggle<T>(arr: T[], v: T): T[] {
   return arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v];
@@ -110,7 +107,12 @@ export function PlpView({
         list.sort((a, b) => Number(b.badges.includes("NEW")) - Number(a.badges.includes("NEW")));
         break;
       case "bestsellers":
-        list.sort((a, b) => b.reviewCount - a.reviewCount);
+        list.sort(
+          (a, b) =>
+            Number(b.badges.includes("BESTSELLER")) -
+              Number(a.badges.includes("BESTSELLER")) ||
+            Number(b.badges.includes("NEW")) - Number(a.badges.includes("NEW")),
+        );
         break;
       case "price-asc":
         list.sort((a, b) => a.price - b.price);
@@ -132,7 +134,9 @@ export function PlpView({
   const panel = (
     <div>
       <FilterGroup title="Collection">
-        {collections.map((c) => (
+        {collections
+          .filter((c) => c.productIds.length > 0)
+          .map((c) => (
           <CheckRow
             key={c.slug}
             label={c.name}
@@ -231,8 +235,8 @@ export function PlpView({
         ))}
       </nav>
 
-      {/* Controls bar */}
-      <div className="mb-8 flex items-center justify-between gap-4">
+      {/* Controls bar — sticks below the site header on scroll */}
+      <div className="sticky top-[5.75rem] z-40 -mx-5 mb-8 flex items-center justify-between gap-4 border-b border-line bg-ivory/95 px-5 py-3 backdrop-blur-md sm:-mx-8 sm:px-8 lg:top-28 lg:-mx-12 lg:px-12">
         <div className="flex items-center gap-4">
           <button
             onClick={() => openFilters("filters")}
@@ -245,20 +249,7 @@ export function PlpView({
             {filtered.length} {filtered.length === 1 ? "piece" : "pieces"}
           </p>
         </div>
-        <label className="flex items-center gap-2">
-          <span className="sr-only">Sort by</span>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as SortKey)}
-            className="border-b border-line bg-transparent py-1 font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink focus:border-accent focus:outline-none"
-          >
-            {(Object.keys(SORT_LABEL) as SortKey[]).map((k) => (
-              <option key={k} value={k}>
-                {SORT_LABEL[k]}
-              </option>
-            ))}
-          </select>
-        </label>
+        <SortMenu value={sort} onChange={setSort} />
       </div>
 
       <div className="grid gap-10 lg:grid-cols-[240px_1fr] lg:gap-12">
@@ -304,8 +295,14 @@ export function PlpView({
         </div>
       </div>
 
-      {/* Mobile filter drawer */}
-      <Drawer open={filtersOpen} onClose={closeFilters} side="left" title={`Filter${activeCount ? ` (${activeCount})` : ""}`}>
+      {/* Mobile filter drawer — same near-full side panel as wishlist */}
+      <Drawer
+        open={filtersOpen}
+        onClose={closeFilters}
+        side="left"
+        title={`Filter${activeCount ? ` (${activeCount})` : ""}`}
+        widthClass="w-[calc(100%-1.25rem)] max-w-[440px]"
+      >
         <div className="px-6">{panel}</div>
         <div className="sticky bottom-0 flex gap-3 border-t border-line bg-surface px-6 py-4 pb-safe-bar">
           <Button
@@ -322,6 +319,105 @@ export function PlpView({
         </div>
       </Drawer>
     </>
+  );
+}
+
+function SortMenu({
+  value,
+  onChange,
+}: {
+  value: SortKey;
+  onChange: (next: SortKey) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const options = Object.keys(SORT_LABEL) as SortKey[];
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointer = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`Sort by ${SORT_LABEL[value]}`}
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex min-h-11 items-center gap-2 font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink transition-colors hover:text-accent-deep"
+      >
+        <span className="text-ink-muted">Sort</span>
+        <span className="border-b border-line pb-0.5">{SORT_LABEL[value]}</span>
+        <ChevronDown
+          size={13}
+          strokeWidth={1.5}
+          className={cn(
+            "text-ink-muted transition-transform duration-300",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="listbox"
+            aria-label="Sort by"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.25, ease: easeOutSoft }}
+            className="absolute right-0 top-[calc(100%+8px)] z-50 min-w-[220px] border border-line bg-ivory py-2 shadow-[0_12px_40px_rgba(26,24,22,0.08)]"
+          >
+            <p className="px-4 pb-2 pt-1 font-sans text-[0.62rem] font-medium uppercase tracking-luxe text-ink-muted">
+              Sort by
+            </p>
+            <ul>
+              {options.map((key) => {
+                const active = key === value;
+                return (
+                  <li key={key}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={active}
+                      onClick={() => {
+                        onChange(key);
+                        setOpen(false);
+                      }}
+                      className={cn(
+                        "flex w-full items-center justify-between gap-4 px-4 py-2.5 text-left font-sans text-[0.82rem] transition-colors hover:bg-stone/70",
+                        active ? "bg-stone/50 text-ink" : "text-ink-muted hover:text-ink",
+                      )}
+                    >
+                      <span>{SORT_LABEL[key]}</span>
+                      {active && (
+                        <span className="font-sans text-[0.62rem] uppercase tracking-wide-sm text-accent-deep">
+                          Active
+                        </span>
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 

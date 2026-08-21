@@ -14,7 +14,9 @@ export type CollectionSlug =
   | "aurelia"
   | "sculpted"
   | "elan"
-  | "signature";
+  | "signature"
+  | "ode-to-nature"
+  | "9kt-fine-gold";
 
 export type MetalOption = {
   id: string;

@@ -2,27 +2,27 @@ import type { Store } from "@/types";
 
 export type { Store };
 
-/** India boutique highlights for the homepage store section. */
+/** Retail destinations highlighted across the site. */
 export const featuredStores: Store[] = [
   {
-    id: "mumbai",
-    city: "Mumbai",
-    name: "Bandra Boutique",
-    address: "Linking Road, Bandra West",
-    hours: "Mon–Sun · 11am–9pm",
+    id: "pune-koregaon",
+    city: "Pune",
+    name: "Koregaon Park",
+    address: "Lane 5, Koregaon Park, Pune",
+    hours: "Mon–Sun · 11am–9:30pm",
   },
   {
-    id: "delhi",
+    id: "gurugram-sector-14",
+    city: "Gurugram",
+    name: "Sector 14",
+    address: "Ground Floor, 293/2, Delhi Road, Anamika Enclave, Sector 14, Gurugram, Haryana 122007",
+    hours: "Mon–Thu · 11am–9:30pm · Fri–Sun · 11am–10pm",
+  },
+  {
+    id: "delhi-lajpat",
     city: "New Delhi",
-    name: "Khan Market",
-    address: "Khan Market, New Delhi",
-    hours: "Mon–Sun · 11am–8pm",
-  },
-  {
-    id: "bengaluru",
-    city: "Bengaluru",
-    name: "Indiranagar",
-    address: "100 Feet Road, Indiranagar",
-    hours: "Mon–Sun · 11am–9pm",
+    name: "Lajpat Nagar",
+    address: "CII/48, Lajpat Nagar, Ground Floor, New Delhi, Delhi 110024",
+    hours: "Mon–Thu · 11am–9:30pm · Fri–Sun · 11am–10pm",
   },
 ];

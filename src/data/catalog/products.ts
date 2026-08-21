@@ -21,10 +21,12 @@ import {
 } from "./products.seed";
 
 const METALS: Record<MetalId, MetalOption> = {
-  yellow: { id: "yellow", label: "18K Yellow Gold", swatch: "#c9a95f" },
-  white: { id: "white", label: "18K White Gold", swatch: "#dcdcdc" },
-  rose: { id: "rose", label: "18K Rose Gold", swatch: "#d8a48a" },
+  yellow: { id: "yellow", label: "14K Gold Plated", swatch: "#c9a95f" },
+  white: { id: "white", label: "White Gold", swatch: "#dcdcdc" },
+  rose: { id: "rose", label: "Rose Gold", swatch: "#d8a48a" },
   platinum: { id: "platinum", label: "Platinum", swatch: "#c7c9cc" },
+  silver: { id: "silver", label: "925 Sterling Silver", swatch: "#c0c4c8" },
+  gold9k: { id: "gold9k", label: "9KT Solid Gold", swatch: "#d4af37" },
 };
 
 const STONES: Record<StoneId, StoneOption> = {
@@ -33,10 +35,47 @@ const STONES: Record<StoneId, StoneOption> = {
   emerald: { id: "emerald", label: "Emerald", swatch: "#2f5d4a" },
   ruby: { id: "ruby", label: "Ruby", swatch: "#7a2233" },
   none: { id: "none", label: "No Stone", swatch: "#e7e2da" },
+  cz: { id: "cz", label: "Cubic Zirconia", swatch: "#e8eef2" },
+  "lab-diamond": {
+    id: "lab-diamond",
+    label: "Laboratory Grown Diamond",
+    swatch: "#f4f7fa",
+  },
 };
 
+/** Single source for PLP filter chips + query-param labels. */
+export const CATALOG_METALS = METALS;
+export const CATALOG_STONES = STONES;
+
+export const metalLabelById = (id: string) => METALS[id as MetalId]?.label;
+export const stoneLabelById = (id: string) => STONES[id as StoneId]?.label;
+
+function materialsFor(s: ProductSeed): string[] {
+  if (s.metals.includes("gold9k")) {
+    return [
+      "9KT Solid Gold",
+      "Laboratory Grown Diamond",
+      "BIS Hallmarked",
+      "Personalize in Yellow, White or Rose Gold",
+    ];
+  }
+  if (s.metals.includes("silver") && !s.metals.includes("yellow")) {
+    return [
+      "925 Sterling Silver",
+      "Rhodium plated finish",
+      "Nickel-free · hypoallergenic · everyday wear",
+    ];
+  }
+  return [
+    "925 Sterling Silver",
+    "14k Gold Plated finish",
+    "Cubic Zirconia accents",
+    "Nickel-free · hypoallergenic · everyday wear",
+  ];
+}
+
 const CARE =
-  "Store separately in the provided pouch. Avoid contact with perfume and cosmetics. Wipe gently with a soft, dry cloth. Suitable for daily wear.";
+  "Store separately in the provided pouch. Avoid contact with perfume and cosmetics. Wipe gently with a soft, dry cloth. Suitable for daily wear. Keep away from strong chemicals and dry thoroughly after exposure to moisture.";
 
 const plateKindFor = (c: CategorySlug): PlateKind => {
   if (c === "rings") return "ring";
@@ -96,11 +135,7 @@ function buildProduct(s: ProductSeed, indexInCategory: number): Product {
     collectionLabel: collectionLabel(s.collection),
     description: s.description,
     story: s.story,
-    materials: [
-      "18k thick gold plating over 925 sterling silver",
-      "Tarnish-resistant, water-safe finish",
-      "Nickel-free · hypoallergenic",
-    ],
+    materials: materialsFor(s),
     metals: s.metals.map((m) => METALS[m]),
     stones: s.stones.map((st) => STONES[st]),
     sizes: s.sizes,
@@ -111,8 +146,9 @@ function buildProduct(s: ProductSeed, indexInCategory: number): Product {
       (s.availability ?? "in-stock") === "made-to-order"
         ? "Made to order · ships in 3–4 weeks"
         : "Complimentary express delivery in 2–4 days",
-    rating: s.rating,
-    reviewCount: s.reviewCount,
+    // Store-wide Loox aggregates are not SKU reviews — hide until per-product data exists.
+    rating: 0,
+    reviewCount: 0,
     dimensions: s.dimensions,
     stoneDetails: s.stoneDetails,
     care: CARE,

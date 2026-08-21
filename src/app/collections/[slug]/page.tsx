@@ -9,7 +9,9 @@ import { bannerFor } from "@/lib/banners";
 import { collections, collectionBySlug, productsByCollection } from "@/data";
 
 export function generateStaticParams() {
-  return collections.map((c) => ({ slug: c.slug }));
+  return collections
+    .filter((c) => c.productIds.length > 0)
+    .map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({
@@ -34,7 +36,7 @@ export default async function CollectionPage({
 }) {
   const { slug } = await params;
   const collection = collectionBySlug(slug);
-  if (!collection) notFound();
+  if (!collection || collection.productIds.length === 0) notFound();
 
   const items = productsByCollection(collection.slug);
 

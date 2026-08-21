@@ -14,6 +14,10 @@ export {
   productsByCollection,
   newArrivals,
   bestSellers,
+  CATALOG_METALS,
+  CATALOG_STONES,
+  metalLabelById,
+  stoneLabelById,
 } from "./catalog/products";
 
 export { categories, categoryBySlug } from "./catalog/categories";
@@ -31,6 +35,31 @@ export { primaryNav } from "./content/navigation";
 export type { NavEntry, NavLink, MegaColumn } from "./content/navigation";
 export { announcements } from "./content/announcements";
 export { homeCategories, homeStyles } from "./content/home";
+export {
+  footerIntro,
+  footerAbout,
+  footerShopByCategory,
+  footerDifferent,
+  footerGifting,
+  footerFaqs,
+  footerCompany,
+  footerNewsletter,
+  footerLinkGroups,
+  footerSocial,
+  footerPopularSearches,
+  footerLegalNote,
+  footerLegalHref,
+} from "./content/footer";
+export type { FooterLink, FooterBlock, FooterFaq } from "@/types";
+export {
+  policyPages,
+  aboutPage,
+  contactPage,
+  sizeGuidePage,
+  policyBySlug,
+  allPolicySlugs,
+} from "./content/info";
+export type { InfoPage, InfoBlock } from "@/types";
 
 // Commerce
 export {

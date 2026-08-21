@@ -13,11 +13,11 @@ export const primaryNav: NavEntry[] = [
   },
   {
     label: "Fine Silver",
-    href: "/jewellery?metal=white",
+    href: "/jewellery?metal=silver",
   },
   {
     label: "9KT Fine Gold",
-    href: "/jewellery?metal=yellow",
+    href: "/collections/9kt-fine-gold",
   },
   {
     label: "Demifine ® Collection",
@@ -27,10 +27,8 @@ export const primaryNav: NavEntry[] = [
         {
           title: "Collections",
           links: [
-            { label: "Emily In Paris", href: "/collections/elan" },
-            { label: "Shraddha's Favourite", href: "/collections/signature" },
-            { label: "Tanya Ghavri Collection", href: "/collections/aurelia" },
-            { label: "Nocturne", href: "/collections/nocturne" },
+            { label: "Ode To Nature", href: "/collections/ode-to-nature" },
+            { label: "9KT Fine Gold", href: "/collections/9kt-fine-gold" },
             { label: "Essential", href: "/collections/essential" },
             { label: "View all collections", href: "/collections" },
           ],
@@ -42,7 +40,6 @@ export const primaryNav: NavEntry[] = [
             { label: "Necklaces", href: "/jewellery/necklaces" },
             { label: "Earrings", href: "/jewellery/earrings" },
             { label: "Bracelets", href: "/jewellery/bracelets" },
-            { label: "Bangles", href: "/jewellery/bangles" },
             { label: "Charms", href: "/jewellery/charms" },
           ],
         },
@@ -51,8 +48,8 @@ export const primaryNav: NavEntry[] = [
           links: [
             { label: "New Arrivals", href: "/jewellery?sort=new" },
             { label: "Best Sellers", href: "/jewellery?sort=bestsellers" },
-            { label: "Personalisation", href: "/jewellery/charms" },
-            { label: "Gifting", href: "/jewellery?sort=new" },
+            { label: "Mangalsutras", href: "/jewellery?q=mangalsutra" },
+            { label: "Gifting", href: "/jewellery?sort=bestsellers" },
           ],
         },
       ],
@@ -66,17 +63,16 @@ export const primaryNav: NavEntry[] = [
   },
   {
     label: "Gifting",
-    href: "/jewellery/charms",
+    href: "/jewellery?sort=bestsellers",
   },
   {
     label: "More",
     href: "/about",
     menu: [
       { label: "About Us", href: "/about" },
-      { label: "Blogs", href: "/blogs" },
       { label: "Contact Us", href: "/contact" },
-      { label: "Support", href: "/support" },
-      { label: "Career", href: "/careers" },
+      { label: "Support", href: "/contact" },
+      { label: "Size Guide", href: "/size-guide" },
       { label: "Stores & Services", href: "/stores" },
     ],
   },

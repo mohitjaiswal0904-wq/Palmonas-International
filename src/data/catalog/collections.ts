@@ -83,6 +83,32 @@ export const collections: Collection[] = [
     editorialImage: "",
     productIds: [],
   },
+  {
+    id: "ode-to-nature",
+    name: COLLECTION_LABELS["ode-to-nature"],
+    slug: "ode-to-nature",
+    tagline: "Nature, cast in silver and gold",
+    description:
+      "Inspired by beetles, moths, ladybugs and woodland blooms — 925 sterling silver pieces finished in radiant 14kt gold, from the Ode To Nature collection.",
+    story:
+      "Ode To Nature celebrates the intricate beauty of the natural world. Each piece is crafted in 925 Sterling Silver with a luminous 14kt gold finish, bringing insect and botanical motifs into everyday fine jewellery — playful, refined, and made to be worn.",
+    heroImage: "",
+    editorialImage: "",
+    productIds: [],
+  },
+  {
+    id: "9kt-fine-gold",
+    name: COLLECTION_LABELS["9kt-fine-gold"],
+    slug: "9kt-fine-gold",
+    tagline: "Solid 9KT gold, lab-grown diamonds",
+    description:
+      "An exquisite 9KT solid gold collection with laboratory grown diamonds — rings, earrings, bracelets, pendants and more for everyday sparkle and special occasions.",
+    story:
+      "9KT Fine Gold brings hallmarked solid gold jewellery with laboratory grown diamonds into daily wear. Personalize in yellow, white or rose gold tones — modern silhouettes crafted for lasting brilliance.",
+    heroImage: "",
+    editorialImage: "",
+    productIds: [],
+  },
 ];
 
 export const collectionBySlug = (slug: string) =>
