@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { PlpView } from "@/components/product/PlpView";
 import { bannerFor } from "@/lib/banners";
 import { collections, collectionBySlug, productsByCollection } from "@/data";
 
@@ -76,7 +76,7 @@ export default async function CollectionPage({
       {/* Complete collection */}
       <section className="border-t border-line py-12 sm:py-16 lg:py-20">
         <Container>
-          <ProductGrid products={items} />
+          <PlpView products={items} activeCollection={collection.slug} />
           <div className="mt-12 flex justify-center sm:mt-16">
             <ButtonLink href="/jewellery" variant="outline">
               Explore all jewellery

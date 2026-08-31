@@ -52,6 +52,7 @@ function toggle<T>(arr: T[], v: T): T[] {
 export function PlpView({
   products,
   activeCategory,
+  activeCollection,
   initialSort = "featured",
   initialMetals = [],
   initialStones = [],
@@ -59,6 +60,8 @@ export function PlpView({
 }: {
   products: Product[];
   activeCategory?: string;
+  /** Collection landing — hide category tabs and collection filter group. */
+  activeCollection?: string;
   initialSort?: SortKey;
   initialMetals?: string[];
   initialStones?: string[];
@@ -133,20 +136,25 @@ export function PlpView({
 
   const panel = (
     <div>
-      <FilterGroup title="Collection">
-        {collections
-          .filter((c) => c.productIds.length > 0)
-          .map((c) => (
-          <CheckRow
-            key={c.slug}
-            label={c.name}
-            checked={filters.collections.includes(c.slug)}
-            onChange={() =>
-              setFilters((f) => ({ ...f, collections: toggle(f.collections, c.slug) }))
-            }
-          />
-        ))}
-      </FilterGroup>
+      {!activeCollection && (
+        <FilterGroup title="Collection">
+          {collections
+            .filter((c) => c.productIds.length > 0)
+            .map((c) => (
+              <CheckRow
+                key={c.slug}
+                label={c.name}
+                checked={filters.collections.includes(c.slug)}
+                onChange={() =>
+                  setFilters((f) => ({
+                    ...f,
+                    collections: toggle(f.collections, c.slug),
+                  }))
+                }
+              />
+            ))}
+        </FilterGroup>
+      )}
       <FilterGroup title="Metal">
         {METALS.map((m) => (
           <CheckRow
@@ -219,21 +227,23 @@ export function PlpView({
 
   return (
     <>
-      {/* Category nav */}
-      <nav
-        aria-label="Categories"
-        className="scroll-thin -mx-5 mb-8 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-5 border-b border-line px-5 sm:mx-0 sm:snap-none sm:scroll-px-0 sm:px-0"
-      >
-        <CategoryTab href="/jewellery" active={!activeCategory} label="All" />
-        {categories.map((c) => (
-          <CategoryTab
-            key={c.slug}
-            href={`/jewellery/${c.slug}`}
-            active={activeCategory === c.slug}
-            label={c.label}
-          />
-        ))}
-      </nav>
+      {/* Category nav — jewellery browse only */}
+      {!activeCollection && (
+        <nav
+          aria-label="Categories"
+          className="scroll-thin -mx-5 mb-8 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-5 border-b border-line px-5 sm:mx-0 sm:snap-none sm:scroll-px-0 sm:px-0"
+        >
+          <CategoryTab href="/jewellery" active={!activeCategory} label="All" />
+          {categories.map((c) => (
+            <CategoryTab
+              key={c.slug}
+              href={`/jewellery/${c.slug}`}
+              active={activeCategory === c.slug}
+              label={c.label}
+            />
+          ))}
+        </nav>
+      )}
 
       {/* Controls bar — sticks below the site header on scroll */}
       <div className="sticky top-[5.75rem] z-40 -mx-5 mb-8 flex items-center justify-between gap-4 border-b border-line bg-ivory/95 px-5 py-3 backdrop-blur-md sm:-mx-8 sm:px-8 lg:top-28 lg:-mx-12 lg:px-12">
