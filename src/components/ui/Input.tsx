@@ -16,7 +16,7 @@ export function Input({
       <input
         id={id}
         className={cn(
-          "w-full border-0 border-b border-line-strong bg-transparent py-2.5 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus-visible:outline-none",
+          "w-full border-0 border-b border-line-strong bg-transparent py-2.5 font-sans text-[16px] text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus-visible:outline-none sm:text-[0.95rem]",
           className,
         )}
         {...props}

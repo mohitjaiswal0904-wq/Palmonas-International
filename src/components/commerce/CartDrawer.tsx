@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import { Drawer } from "@/components/ui/Drawer";
 import { Media } from "@/components/ui/Media";
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { useUi } from "@/stores/ui";
 import { useCart, type CartLine } from "@/stores/cart";
 import { useWishlist } from "@/stores/wishlist";
@@ -243,12 +243,14 @@ export function CartDrawer() {
               <span className="font-serif text-xl text-ink">{money(subtotal)}</span>
             </div>
             <p className="mt-1 font-sans text-[0.72rem] text-ink-muted">
-              Complimentary express delivery &amp; returns. Online checkout is
-              coming soon — your bag is saved on this device.
+              Complimentary express delivery on most orders. Tax calculated at checkout.
             </p>
-            <Button className="mt-5 w-full" size="lg" disabled title="Checkout is not available in this prototype">
-              Checkout coming soon
-            </Button>
+            <ButtonLink href="/checkout" className="mt-5 w-full" size="lg" onClick={close}>
+              Checkout
+            </ButtonLink>
+            <p className="mt-2 text-center font-sans text-[0.65rem] text-ink-faint">
+              UI preview — payment integration coming later
+            </p>
             <button
               onClick={() => openOverlay("wishlist")}
               className="mt-3 min-h-11 w-full text-center font-sans text-[0.72rem] uppercase tracking-wide-sm text-ink-muted hover:text-ink"

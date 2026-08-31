@@ -26,11 +26,11 @@ type AccountState = {
 
 /** Known demo credentials for walking the full account UI. */
 export const DEMO_ACCOUNT = {
-  email: "ava@palmonas.com",
+  email: "meera@palmonas.com",
   password: "palmonas",
   profile: {
-    email: "ava@palmonas.com",
-    name: "Ava Sharma",
+    email: "meera@palmonas.com",
+    name: "Meera Kapoor",
     phone: "+1 (212) 555-0148",
     memberSince: "2025-11-14",
   } satisfies AccountUser,

@@ -78,6 +78,7 @@ export {
   formatOrderDate,
   formatOrderDateTime,
 } from "./commerce/orders";
+export { coupons, validateCoupon, couponByCode } from "./commerce/coupons";
 export type {
   Order,
   OrderLine,

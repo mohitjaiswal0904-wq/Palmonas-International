@@ -81,7 +81,7 @@ export default function AccountProfilePage() {
         <p className="eyebrow mb-3">Session</p>
         <p className="mb-5 max-w-[40ch] font-sans text-[0.85rem] text-ink-muted">
           Sign out clears this device session. Demo orders and addresses remain available next
-          time you sign in as Ava.
+          time you sign in as Meera.
         </p>
         <Button
           variant="outline"

@@ -46,3 +46,10 @@ export type {
 } from "./account";
 
 export { ORDER_STATUS_LABEL } from "./account";
+
+export type {
+  CheckoutStep,
+  AppliedCoupon,
+  CheckoutTotals,
+  NewAddressInput,
+} from "./checkout";

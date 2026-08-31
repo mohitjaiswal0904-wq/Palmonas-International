@@ -23,8 +23,8 @@ function line(
   };
 }
 
-const AVA_SHIPPING = {
-  name: "Ava Sharma",
+const MEERA_SHIPPING = {
+  name: "Meera Kapoor",
   line1: "14 Mercer Street",
   line2: "Apt 4B",
   city: "New York",
@@ -34,8 +34,8 @@ const AVA_SHIPPING = {
   phone: "+1 (212) 555-0148",
 };
 
-const AVA_BILLING = {
-  name: "Ava Sharma",
+const MEERA_BILLING = {
+  name: "Meera Kapoor",
   line1: "14 Mercer Street",
   line2: "Apt 4B",
   city: "New York",
@@ -45,7 +45,7 @@ const AVA_BILLING = {
   phone: "+1 (212) 555-0148",
 };
 
-/** Demo orders for the sample account (`ava@palmonas.com`). */
+/** Demo orders for the sample account (`meera@palmonas.com`). */
 export const demoOrders: Order[] = [
   {
     id: "ord-pm-2912",
@@ -62,8 +62,8 @@ export const demoOrders: Order[] = [
       line("925-sterling-silver-beetles-crest-tie-clip", 1),
       line("925-sterling-silver-meadow-ladybug-earcuff", 2),
     ],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Visa ···· 4242",
     estimatedDelivery: "2026-08-18",
     timeline: [
@@ -86,12 +86,12 @@ export const demoOrders: Order[] = [
     total: 3726,
     items: [line("925-sterling-silver-mayfly-bloom-ring", 1, { size: "6" })],
     shippingAddress: {
-      ...AVA_SHIPPING,
+      ...MEERA_SHIPPING,
       line1: "120 Broadway",
       line2: "Floor 18",
       postal: "10271",
     },
-    billingAddress: AVA_BILLING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Apple Pay",
     trackingNumber: "1Z999AA10987654321",
     carrier: "UPS",
@@ -119,8 +119,8 @@ export const demoOrders: Order[] = [
       line("925-sterling-silver-wild-grove-ring", 1, { size: "7" }),
       line("925-sterling-silver-dawn-wing-earrings", 1),
     ],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Visa ···· 4242",
     trackingNumber: "1Z999AA10123456784",
     carrier: "UPS",
@@ -149,8 +149,8 @@ export const demoOrders: Order[] = [
       line("925-sterling-silver-golden-drift-pearl-earcuff", 1),
       line("925-sterling-silver-golden-fruitfly-pollen-ring", 1, { size: "6" }),
     ],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Mastercard ···· 5512",
     trackingNumber: "9400111899229988776655",
     carrier: "USPS",
@@ -178,8 +178,8 @@ export const demoOrders: Order[] = [
       line("925-sterling-silver-bloom-ladybug-earrings", 1),
       line("925-sterling-silver-ladybug-fortune-ring", 1, { size: "6" }),
     ],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Apple Pay",
     trackingNumber: "9400111899223344556677",
     carrier: "USPS",
@@ -217,7 +217,7 @@ export const demoOrders: Order[] = [
       country: "India",
       phone: "+91 98200 11223",
     },
-    billingAddress: AVA_BILLING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Visa ···· 4242",
     trackingNumber: "JD014600009988776655",
     carrier: "DHL",
@@ -243,13 +243,13 @@ export const demoOrders: Order[] = [
     total: 4536,
     items: [line("925-sterling-silver-nector-mayfly-earrings", 1)],
     shippingAddress: {
-      ...AVA_SHIPPING,
+      ...MEERA_SHIPPING,
       line1: "88 Bond Street",
       line2: undefined,
       city: "Brooklyn",
       postal: "11201",
     },
-    billingAddress: AVA_BILLING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Mastercard ···· 5512",
     trackingNumber: "JD014600003456789012",
     carrier: "DHL",
@@ -277,8 +277,8 @@ export const demoOrders: Order[] = [
       line("925-sterling-silver-dewflight-pearl-earrings", 1),
       line("925-sterling-silver-moth-flutter-earrings", 1),
     ],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Apple Pay",
     trackingNumber: "1Z999AA104455667788",
     carrier: "UPS",
@@ -303,8 +303,8 @@ export const demoOrders: Order[] = [
     tax: 0,
     total: 0,
     items: [line("925-sterling-silver-amberwing-earrings", 1)],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Visa ···· 4242",
     timeline: [
       { label: "Order placed", at: "2026-03-11T12:18:00.000Z", done: true },
@@ -323,8 +323,8 @@ export const demoOrders: Order[] = [
     tax: 448,
     total: 6048,
     items: [line("925-sterling-silver-sunwing-fruitfly-earrings", 1)],
-    shippingAddress: AVA_SHIPPING,
-    billingAddress: AVA_BILLING,
+    shippingAddress: MEERA_SHIPPING,
+    billingAddress: MEERA_BILLING,
     paymentMethod: "Mastercard ···· 5512",
     trackingNumber: "JD014600001122334455",
     carrier: "DHL",
@@ -345,13 +345,13 @@ export const demoAddresses: SavedAddress[] = [
     id: "addr-home",
     label: "Home",
     isDefault: true,
-    ...AVA_SHIPPING,
+    ...MEERA_SHIPPING,
   },
   {
     id: "addr-work",
     label: "Work",
     isDefault: false,
-    name: "Ava Sharma",
+    name: "Meera Kapoor",
     line1: "120 Broadway",
     line2: "Floor 18",
     city: "New York",
