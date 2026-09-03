@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Checkout Address",
+    "path": "/checkout/address?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Desktop / Checkout / Step 1 Address",
+    "id": "311bd8d7-0a5f-46e6-8183-32e6de5547cb"
+  },
+  {
+    "name": "Checkout Coupon",
+    "path": "/checkout/coupon?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Desktop / Checkout / Step 2 Offers",
+    "id": "8a15e8f6-564c-4d88-8caf-088cf0dec099"
+  },
+  {
+    "name": "Checkout Review",
+    "path": "/checkout/review?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Desktop / Checkout / Step 3 Review",
+    "id": "9ff8c28a-ddac-41d9-b92c-c3aecc394efe"
+  }
+]

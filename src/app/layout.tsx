@@ -82,6 +82,12 @@ export default function RootLayout({
           }}
         />
         <SiteChrome>{children}</SiteChrome>
+        {process.env.NODE_ENV === "development" ? (
+          <script
+            src="https://mcp.figma.com/mcp/html-to-design/capture.js"
+            async
+          />
+        ) : null}
       </body>
     </html>
   );

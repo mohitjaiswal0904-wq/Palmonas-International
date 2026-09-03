@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Cart Drawer",
+    "path": "/?figmaSeed=cart&figmaOverlay=cart",
+    "overlay": "cart",
+    "frame": "Desktop / Overlay / Cart Drawer",
+    "id": "1024121a-ebea-4da2-a46e-0abc35da6d0c"
+  },
+  {
+    "name": "Wishlist Drawer",
+    "path": "/?figmaOverlay=wishlist",
+    "overlay": "wishlist",
+    "frame": "Desktop / Overlay / Wishlist Drawer",
+    "id": "589e0976-3750-45ee-b178-6e75bea354b3"
+  },
+  {
+    "name": "Search Overlay",
+    "path": "/?figmaOverlay=search",
+    "overlay": "search",
+    "frame": "Desktop / Overlay / Search",
+    "id": "26db7ca0-ca1f-47b4-ab6b-bc44b37ba77f"
+  },
+  {
+    "name": "PLP Filters",
+    "path": "/jewellery/rings",
+    "frame": "Desktop / PLP / Filters Sidebar",
+    "id": "6e6e29a5-971f-4e93-9d37-db79c5941ef6"
+  }
+]

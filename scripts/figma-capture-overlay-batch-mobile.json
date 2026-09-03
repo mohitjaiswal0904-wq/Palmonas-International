@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Mobile Nav Menu",
+    "path": "/?figmaOverlay=menu",
+    "frame": "Mobile / Overlay / Nav Menu",
+    "id": "cad7e49c-1407-4315-96cd-41ad28822028"
+  },
+  {
+    "name": "Account Drawer",
+    "path": "/?figmaOverlay=account",
+    "frame": "Mobile / Overlay / Account Drawer",
+    "id": "6be408c8-ceec-49d8-9e17-69eb8efe7eb8"
+  },
+  {
+    "name": "Cart Drawer",
+    "path": "/?figmaSeed=cart&figmaOverlay=cart",
+    "frame": "Mobile / Overlay / Cart Drawer",
+    "id": "b5f9cf44-bfae-4492-8ec7-8b686236f119"
+  },
+  {
+    "name": "Wishlist Drawer",
+    "path": "/?figmaOverlay=wishlist",
+    "frame": "Mobile / Overlay / Wishlist Drawer",
+    "id": "22dfe8b3-97b5-44aa-b208-eb179f289137"
+  },
+  {
+    "name": "Search Overlay",
+    "path": "/?figmaOverlay=search",
+    "frame": "Mobile / Overlay / Search",
+    "id": "30b7aa31-088c-4031-b293-038e68e67d3a"
+  },
+  {
+    "name": "PLP Filters",
+    "path": "/jewellery/rings?figmaOverlay=filters",
+    "frame": "Mobile / Overlay / PLP Filters",
+    "id": "af2819d0-0319-4957-bae6-65b3a73ec909"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "name": "About",
+    "path": "/about",
+    "section": "Marketing",
+    "sectionId": "5:10",
+    "frame": "Desktop / About / Default",
+    "oldId": "7:2",
+    "id": "0ceb9ddd-3150-4876-be88-e28153a9c0fb"
+  },
+  {
+    "name": "Contact",
+    "path": "/contact",
+    "section": "Marketing",
+    "sectionId": "5:10",
+    "frame": "Desktop / Contact / Default",
+    "oldId": "8:2",
+    "id": "fcffe4e8-ce3b-41e1-a2d0-aa46e4174039"
+  },
+  {
+    "name": "Stores",
+    "path": "/stores",
+    "section": "Marketing",
+    "sectionId": "5:10",
+    "frame": "Desktop / Stores / Default",
+    "oldId": "9:2",
+    "id": "cfb10226-4064-47b5-8ea3-6442ba1ad41e"
+  },
+  {
+    "name": "Size Guide",
+    "path": "/size-guide",
+    "section": "Marketing",
+    "sectionId": "5:10",
+    "frame": "Desktop / Size Guide / Default",
+    "oldId": "11:2",
+    "id": "42a986f1-5937-4508-890a-a4e56ba13e74"
+  },
+  {
+    "name": "Blogs",
+    "path": "/blogs",
+    "section": "Marketing",
+    "sectionId": "5:10",
+    "frame": "Desktop / Blogs / Default",
+    "oldId": "12:2",
+    "id": "9508c6e7-9667-4fe4-b084-e7458ab06dfc"
+  },
+  {
+    "name": "Mega Menu",
+    "path": "/?figmaOverlay=menu",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "menu",
+    "frame": "Desktop / Overlay / Mega Menu",
+    "oldId": "38:2",
+    "id": "2013f5ca-848e-43b5-bbd8-38e42321792a"
+  },
+  {
+    "name": "Account Drawer",
+    "path": "/?figmaOverlay=account",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "account",
+    "frame": "Desktop / Overlay / Account Drawer",
+    "oldId": "39:2",
+    "id": "79c8e47e-9b0b-44fa-aa6d-a64872b5beda"
+  },
+  {
+    "name": "Cart Drawer",
+    "path": "/?figmaSeed=cart&figmaOverlay=cart",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "cart",
+    "frame": "Desktop / Overlay / Cart Drawer",
+    "oldId": "40:2",
+    "id": "0fd71ae0-6d23-4dd8-b25f-2edd22e28415"
+  },
+  {
+    "name": "Wishlist Drawer",
+    "path": "/?figmaOverlay=wishlist",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "wishlist",
+    "frame": "Desktop / Overlay / Wishlist Drawer",
+    "oldId": "43:2",
+    "id": "0928bac6-0fd0-49ed-a465-2ea51dd2b552"
+  },
+  {
+    "name": "Search Overlay",
+    "path": "/?figmaOverlay=search",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "search",
+    "frame": "Desktop / Overlay / Search",
+    "oldId": "44:2",
+    "id": "b26b546e-ae21-43c4-8357-0e8e92ad57da"
+  },
+  {
+    "name": "PLP Filters",
+    "path": "/jewellery/rings?figmaOverlay=filters",
+    "section": "Overlays",
+    "sectionId": "42:2",
+    "overlay": "filters",
+    "frame": "Desktop / PLP / Filters Sidebar",
+    "oldId": "45:29",
+    "id": "8a12fea9-672e-4fcc-bab5-571b53e71198"
+  }
+]

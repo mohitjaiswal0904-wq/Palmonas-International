@@ -1,0 +1,24 @@
+{
+  "capturePage": "Capture Staging",
+  "mobilePage": "10 — Mobile Screens",
+  "overlaysPage": "12 — Overlays & States",
+  "sections": {
+    "Marketing": "3:10",
+    "Catalogue": "3:11",
+    "Product Detail": "3:12",
+    "Collections": "3:13",
+    "Checkout": "3:14",
+    "Account": "3:15",
+    "Content & Policies": "3:16",
+    "System": "3:17"
+  },
+  "overlaySectionId": "3:18",
+  "overlayNames": [
+    "Mobile / Overlay / Nav Menu",
+    "Mobile / Overlay / Account Drawer",
+    "Mobile / Overlay / Cart Drawer",
+    "Mobile / Overlay / Wishlist Drawer",
+    "Mobile / Overlay / Search",
+    "Mobile / Overlay / PLP Filters"
+  ]
+}

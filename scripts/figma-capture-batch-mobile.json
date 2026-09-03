@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Home",
+    "path": "/",
+    "section": "Marketing",
+    "frame": "Mobile / Home / Default",
+    "id": "fd3fc2f6-1821-4a28-ba55-3647cf9a003f"
+  },
+  {
+    "name": "About",
+    "path": "/about",
+    "section": "Marketing",
+    "frame": "Mobile / About / Default",
+    "id": "ffed2bec-c2ec-4b1e-adc2-0c3d26c658a8"
+  },
+  {
+    "name": "Contact",
+    "path": "/contact",
+    "section": "Marketing",
+    "frame": "Mobile / Contact / Default",
+    "id": "15bc8bc3-6cb2-46e2-9ba6-f39d5aea0245"
+  },
+  {
+    "name": "Stores",
+    "path": "/stores",
+    "section": "Marketing",
+    "frame": "Mobile / Stores / Default",
+    "id": "321cdfe6-78ab-46a8-a5de-d571f1813165"
+  },
+  {
+    "name": "Size Guide",
+    "path": "/size-guide",
+    "section": "Marketing",
+    "frame": "Mobile / Size Guide / Default",
+    "id": "ab776fdd-af79-4828-95f6-741d4db082b8"
+  },
+  {
+    "name": "Blogs",
+    "path": "/blogs",
+    "section": "Marketing",
+    "frame": "Mobile / Blogs / Default",
+    "id": "8ce6b242-4fa0-4e44-94dc-45af909a8205"
+  },
+  {
+    "name": "Jewellery All",
+    "path": "/jewellery",
+    "section": "Catalogue",
+    "frame": "Mobile / Jewellery / All",
+    "id": "734e5b2f-5649-431e-90e3-514616b6edf1"
+  },
+  {
+    "name": "Jewellery Rings",
+    "path": "/jewellery/rings",
+    "section": "Catalogue",
+    "frame": "Mobile / Jewellery / Rings",
+    "id": "56122464-55b4-457c-9334-60b8eb48d85c"
+  },
+  {
+    "name": "Jewellery Necklaces",
+    "path": "/jewellery/necklaces",
+    "section": "Catalogue",
+    "frame": "Mobile / Jewellery / Necklaces",
+    "id": "5923c8f9-bd00-494a-ba32-28c079e66c85"
+  },
+  {
+    "name": "Jewellery Earrings",
+    "path": "/jewellery/earrings",
+    "section": "Catalogue",
+    "frame": "Mobile / Jewellery / Earrings",
+    "id": "ae98743e-8a7a-4050-a92e-2cebdcc70058"
+  },
+  {
+    "name": "Jewellery Bracelets",
+    "path": "/jewellery/bracelets",
+    "section": "Catalogue",
+    "frame": "Mobile / Jewellery / Bracelets",
+    "id": "1ad462f9-3f40-43f5-bb37-39de155f52c6"
+  },
+  {
+    "name": "PDP",
+    "path": "/jewellery/bracelets/925-sterling-silver-beat-drop-bracelet",
+    "section": "Product Detail",
+    "frame": "Mobile / PDP / Default",
+    "id": "cd6b0e6d-0024-46d7-a2e1-ecb79b0262d1"
+  },
+  {
+    "name": "Collections",
+    "path": "/collections",
+    "section": "Collections",
+    "frame": "Mobile / Collections / Index",
+    "id": "4b5bf05f-6252-45b1-817b-d7fa181228a8"
+  },
+  {
+    "name": "Collection Essential",
+    "path": "/collections/essential",
+    "section": "Collections",
+    "frame": "Mobile / Collections / Essential",
+    "id": "36461ddd-bf67-4345-a07c-2e27b3c3ddda"
+  },
+  {
+    "name": "Collection Ode To Nature",
+    "path": "/collections/ode-to-nature",
+    "section": "Collections",
+    "frame": "Mobile / Collections / Ode To Nature",
+    "id": "e0e3f14a-e9a4-4989-804a-01b4612c265d"
+  },
+  {
+    "name": "Collection 9KT Gold",
+    "path": "/collections/9kt-fine-gold",
+    "section": "Collections",
+    "frame": "Mobile / Collections / 9KT Fine Gold",
+    "id": "4179331d-5b6a-4313-9d90-3edd2891ac70"
+  },
+  {
+    "name": "Policies Index",
+    "path": "/policies",
+    "section": "Content & Policies",
+    "frame": "Mobile / Policies / Index",
+    "id": "5732581c-358d-4e1b-80f7-0ceeb3ad17ab"
+  },
+  {
+    "name": "Policy Shipping",
+    "path": "/policies/shipping-delivery",
+    "section": "Content & Policies",
+    "frame": "Mobile / Policies / Shipping",
+    "id": "717da880-0c01-411d-a12d-d647ab539bec"
+  },
+  {
+    "name": "Policy Returns",
+    "path": "/policies/return-exchange",
+    "section": "Content & Policies",
+    "frame": "Mobile / Policies / Returns",
+    "id": "af74c388-ef51-493d-96ab-0ff3490a2b17"
+  },
+  {
+    "name": "Policy Privacy",
+    "path": "/policies/privacy",
+    "section": "Content & Policies",
+    "frame": "Mobile / Policies / Privacy",
+    "id": "08c63695-e3b5-49f6-8209-3781cc98ab04"
+  },
+  {
+    "name": "Account Sign In",
+    "path": "/account",
+    "section": "Account",
+    "frame": "Mobile / Account / Sign In",
+    "id": "6468c192-e7a3-455e-9c20-7beb1cc7094e"
+  },
+  {
+    "name": "Account Profile",
+    "path": "/account/profile?figmaSeed=account",
+    "section": "Account",
+    "frame": "Mobile / Account / Profile",
+    "id": "9eb81d2a-ca8b-43f8-81ea-89430b83b2c8"
+  },
+  {
+    "name": "Account Orders",
+    "path": "/account/orders?figmaSeed=account",
+    "section": "Account",
+    "frame": "Mobile / Account / Orders",
+    "id": "f29d0b6a-72e6-49ac-954e-8731f605c754"
+  },
+  {
+    "name": "Account Order Detail",
+    "path": "/account/orders/ord-pm-2912?figmaSeed=account",
+    "section": "Account",
+    "frame": "Mobile / Account / Order Detail",
+    "id": "57872ef3-e884-4555-831a-b0474cbbbe2d"
+  },
+  {
+    "name": "Account Addresses",
+    "path": "/account/addresses?figmaSeed=account",
+    "section": "Account",
+    "frame": "Mobile / Account / Addresses",
+    "id": "3f9b5ea7-bddd-454a-a624-fc619bcc5119"
+  },
+  {
+    "name": "Checkout Address",
+    "path": "/checkout/address?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Mobile / Checkout / Step 1 Address",
+    "id": "1c4eec44-6531-4589-b1d1-5483df42595d"
+  },
+  {
+    "name": "Checkout Coupon",
+    "path": "/checkout/coupon?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Mobile / Checkout / Step 2 Offers",
+    "id": "0827b0d2-6c0f-4065-851b-f1c7887e3e1b"
+  },
+  {
+    "name": "Checkout Review",
+    "path": "/checkout/review?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Mobile / Checkout / Step 3 Review",
+    "id": "3fefbc0e-b794-4334-9d4f-029075f1dd31"
+  },
+  {
+    "name": "Checkout Confirmation",
+    "path": "/checkout/confirmation?figmaSeed=cart",
+    "section": "Checkout",
+    "frame": "Mobile / Checkout / Confirmation",
+    "id": "aafd82ac-1004-4667-bfbc-ae77a92ffea1"
+  },
+  {
+    "name": "404",
+    "path": "/this-page-does-not-exist",
+    "section": "System",
+    "frame": "Mobile / System / Not Found",
+    "id": "f58541e4-7870-4671-9731-a2c83be8edf8"
+  }
+]

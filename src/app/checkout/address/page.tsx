@@ -16,6 +16,77 @@ import { AddressBlock } from "@/components/account/OrderCard";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { cn } from "@/lib/cn";
+import type { SavedAddress } from "@/types/account";
+
+function AddressCard({
+  address,
+  selected,
+  onSelect,
+  showDefaultBadge = true,
+}: {
+  address: SavedAddress;
+  selected: boolean;
+  onSelect: () => void;
+  showDefaultBadge?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={selected}
+      onClick={onSelect}
+      className={cn(
+        "min-h-11 w-full min-w-0 px-4 py-4 text-left transition-colors sm:px-5 sm:py-5",
+        checkoutSelectClass(selected),
+      )}
+    >
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <span className="font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink">
+          {address.label}
+        </span>
+        <span className="flex shrink-0 items-center gap-2">
+          {selected ? (
+            <span className="flex items-center gap-1 font-sans text-[0.62rem] font-medium uppercase tracking-wide-sm text-ink">
+              <Check size={13} strokeWidth={2.5} aria-hidden />
+              Selected
+            </span>
+          ) : null}
+          {showDefaultBadge && address.isDefault ? (
+            <span className="font-sans text-[0.65rem] uppercase tracking-wide-sm text-ink-muted">
+              Default
+            </span>
+          ) : null}
+        </span>
+      </div>
+      <AddressBlock {...address} />
+    </button>
+  );
+}
+
+function AddressCardGrid({
+  addresses,
+  selectedId,
+  onSelect,
+  showDefaultBadge = true,
+}: {
+  addresses: SavedAddress[];
+  selectedId: string | null;
+  onSelect: (id: string) => void;
+  showDefaultBadge?: boolean;
+}) {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+      {addresses.map((address) => (
+        <AddressCard
+          key={address.id}
+          address={address}
+          selected={selectedId === address.id}
+          onSelect={() => onSelect(address.id)}
+          showDefaultBadge={showDefaultBadge}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function CheckoutAddressPage() {
   const router = useRouter();
@@ -66,48 +137,16 @@ export default function CheckoutAddressPage() {
           Choose a saved address or add a new one. Billing can match shipping or use a separate address.
         </p>
 
-        <section>
+        <section className="w-full border border-line p-4 sm:p-6 lg:p-8">
           <h2 className="eyebrow mb-4">Shipping address</h2>
-          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-            {addresses.map((address) => {
-              const selected = shippingAddressId === address.id;
-              return (
-                <button
-                  key={address.id}
-                  type="button"
-                  aria-pressed={selected}
-                  onClick={() => {
-                    setShippingAddressId(address.id);
-                    setError("");
-                  }}
-                  className={cn(
-                    "min-h-11 px-4 py-4 text-left transition-colors sm:px-5 sm:py-5",
-                    checkoutSelectClass(selected),
-                  )}
-                >
-                  <div className="mb-3 flex items-center justify-between gap-2">
-                    <span className="font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink">
-                      {address.label}
-                    </span>
-                    <span className="flex shrink-0 items-center gap-2">
-                      {selected ? (
-                        <span className="flex items-center gap-1 font-sans text-[0.62rem] font-medium uppercase tracking-wide-sm text-ink">
-                          <Check size={13} strokeWidth={2.5} aria-hidden />
-                          Selected
-                        </span>
-                      ) : null}
-                      {address.isDefault ? (
-                        <span className="font-sans text-[0.65rem] uppercase tracking-wide-sm text-ink-muted">
-                          Default
-                        </span>
-                      ) : null}
-                    </span>
-                  </div>
-                  <AddressBlock {...address} />
-                </button>
-              );
-            })}
-          </div>
+          <AddressCardGrid
+            addresses={addresses}
+            selectedId={shippingAddressId}
+            onSelect={(id) => {
+              setShippingAddressId(id);
+              setError("");
+            }}
+          />
 
           {!showNew ? (
             <Button
@@ -151,7 +190,7 @@ export default function CheckoutAddressPage() {
           )}
         </section>
 
-        <section className="mt-8 border-t border-line pt-8 sm:mt-10 sm:pt-10">
+        <section className="mt-8 w-full border border-line p-4 sm:mt-10 sm:p-6 lg:p-8">
           <h2 className="eyebrow mb-4">Billing address</h2>
           <label className="flex min-h-11 cursor-pointer items-center gap-3 py-2">
             <input
@@ -164,35 +203,13 @@ export default function CheckoutAddressPage() {
           </label>
 
           {!billingSameAsShipping ? (
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 sm:gap-4">
-              {addresses.map((address) => {
-                const selected = billingAddressId === address.id;
-                return (
-                  <button
-                    key={`bill-${address.id}`}
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => setBillingAddressId(address.id)}
-                    className={cn(
-                      "min-h-11 px-4 py-4 text-left transition-colors sm:px-5 sm:py-5",
-                      checkoutSelectClass(selected),
-                    )}
-                  >
-                    <div className="mb-3 flex items-center justify-between gap-2">
-                      <p className="font-sans text-[0.74rem] uppercase tracking-wide-sm text-ink">
-                        {address.label}
-                      </p>
-                      {selected ? (
-                        <span className="flex shrink-0 items-center gap-1 font-sans text-[0.62rem] font-medium uppercase tracking-wide-sm text-ink">
-                          <Check size={13} strokeWidth={2.5} aria-hidden />
-                          Selected
-                        </span>
-                      ) : null}
-                    </div>
-                    <AddressBlock {...address} />
-                  </button>
-                );
-              })}
+            <div className="mt-3">
+              <AddressCardGrid
+                addresses={addresses}
+                selectedId={billingAddressId}
+                onSelect={setBillingAddressId}
+                showDefaultBadge={false}
+              />
             </div>
           ) : null}
         </section>

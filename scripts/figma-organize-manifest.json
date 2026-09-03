@@ -1,0 +1,23 @@
+{
+  "capturePage": "Page 1",
+  "desktopPage": "10 — Desktop Screens",
+  "overlaysPage": "12 — Overlays & States",
+  "sections": {
+    "Marketing": "5:10",
+    "Catalogue": "5:11",
+    "Product Detail": "5:12",
+    "Collections": "5:13",
+    "Checkout": "5:14",
+    "Account": "5:15",
+    "Content & Policies": "5:16",
+    "System": "5:17"
+  },
+  "overlayNames": [
+    "Desktop / Overlay / Mega Menu",
+    "Desktop / Overlay / Account Drawer",
+    "Desktop / Overlay / Cart Drawer",
+    "Desktop / Overlay / Wishlist Drawer",
+    "Desktop / Overlay / Search",
+    "Desktop / PLP / Filters Sidebar"
+  ]
+}

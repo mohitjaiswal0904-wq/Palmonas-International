@@ -1,0 +1,11 @@
+[
+  {"name":"Account Profile","path":"/account/profile?figmaSeed=account","section":"Account","frame":"Mobile / Account / Profile","id":"9eb81d2a-ca8b-43f8-81ea-89430b83b2c8"},
+  {"name":"Account Orders","path":"/account/orders?figmaSeed=account","section":"Account","frame":"Mobile / Account / Orders","id":"f29d0b6a-72e6-49ac-954e-8731f605c754"},
+  {"name":"Account Order Detail","path":"/account/orders/ord-pm-2912?figmaSeed=account","section":"Account","frame":"Mobile / Account / Order Detail","id":"57872ef3-e884-4555-831a-b0474cbbbe2d"},
+  {"name":"Account Addresses","path":"/account/addresses?figmaSeed=account","section":"Account","frame":"Mobile / Account / Addresses","id":"3f9b5ea7-bddd-454a-a624-fc619bcc5119"},
+  {"name":"Checkout Address","path":"/checkout/address?figmaSeed=cart","section":"Checkout","frame":"Mobile / Checkout / Step 1 Address","id":"1c4eec44-6531-4589-b1d1-5483df42595d"},
+  {"name":"Checkout Coupon","path":"/checkout/coupon?figmaSeed=cart","section":"Checkout","frame":"Mobile / Checkout / Step 2 Offers","id":"0827b0d2-6c0f-4065-851b-f1c7887e3e1b"},
+  {"name":"Checkout Review","path":"/checkout/review?figmaSeed=cart","section":"Checkout","frame":"Mobile / Checkout / Step 3 Review","id":"3fefbc0e-b794-4334-9d4f-029075f1dd31"},
+  {"name":"Checkout Confirmation","path":"/checkout/confirmation?figmaSeed=cart","section":"Checkout","frame":"Mobile / Checkout / Confirmation","id":"aafd82ac-1004-4667-bfbc-ae77a92ffea1"},
+  {"name":"404","path":"/this-page-does-not-exist","section":"System","frame":"Mobile / System / Not Found","id":"f58541e4-7870-4671-9731-a2c83be8edf8"}
+]

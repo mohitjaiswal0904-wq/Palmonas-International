@@ -1,0 +1,90 @@
+[
+  {
+    "name": "About",
+    "path": "/about",
+    "frame": "Desktop / About / Default",
+    "sectionId": "5:10",
+    "oldId": "7:2",
+    "id": "313f26c0-462c-4e2e-b932-28367b5f695c"
+  },
+  {
+    "name": "Contact",
+    "path": "/contact",
+    "frame": "Desktop / Contact / Default",
+    "sectionId": "5:10",
+    "oldId": "8:2",
+    "id": "a953bb03-98ae-460c-bf80-e6c0fa01cca0"
+  },
+  {
+    "name": "Stores",
+    "path": "/stores",
+    "frame": "Desktop / Stores / Default",
+    "sectionId": "5:10",
+    "oldId": "9:2",
+    "id": "a19807c2-8416-4033-a2f1-d2f7d5f05838"
+  },
+  {
+    "name": "Size Guide",
+    "path": "/size-guide",
+    "frame": "Desktop / Size Guide / Default",
+    "sectionId": "5:10",
+    "oldId": "11:2",
+    "id": "b17449da-26d7-4a5e-be23-958361482696"
+  },
+  {
+    "name": "Blogs",
+    "path": "/blogs",
+    "frame": "Desktop / Blogs / Default",
+    "sectionId": "5:10",
+    "oldId": "12:2",
+    "id": "8eca10a9-cc6c-4edf-b50e-c59a90b8edd9"
+  },
+  {
+    "name": "Mega Menu",
+    "path": "/?figmaOverlay=menu",
+    "frame": "Desktop / Overlay / Mega Menu",
+    "sectionId": "42:2",
+    "oldId": "38:2",
+    "id": "c7af67fa-fda8-4f4c-a054-1b41a710369e"
+  },
+  {
+    "name": "Account Drawer",
+    "path": "/?figmaOverlay=account",
+    "frame": "Desktop / Overlay / Account Drawer",
+    "sectionId": "42:2",
+    "oldId": "39:2",
+    "id": "c0127cd2-0e67-4bec-b8be-d666ff940f6a"
+  },
+  {
+    "name": "Cart Drawer",
+    "path": "/?figmaSeed=cart&figmaOverlay=cart",
+    "frame": "Desktop / Overlay / Cart Drawer",
+    "sectionId": "42:2",
+    "oldId": "40:2",
+    "id": "d7d16487-e3c5-43c9-956c-ad73c7529df4"
+  },
+  {
+    "name": "Wishlist Drawer",
+    "path": "/?figmaOverlay=wishlist",
+    "frame": "Desktop / Overlay / Wishlist Drawer",
+    "sectionId": "42:2",
+    "oldId": "43:2",
+    "id": "45a1c79f-5293-4995-a1cb-d13395de17e9"
+  },
+  {
+    "name": "Search Overlay",
+    "path": "/?figmaOverlay=search",
+    "frame": "Desktop / Overlay / Search",
+    "sectionId": "42:2",
+    "oldId": "44:2",
+    "id": "ba3d4e41-b9ff-4399-b025-e917748076ae"
+  },
+  {
+    "name": "PLP Filters",
+    "path": "/jewellery/rings?figmaOverlay=filters",
+    "frame": "Desktop / PLP / Filters Sidebar",
+    "sectionId": "42:2",
+    "oldId": "45:29",
+    "id": "8c6313fa-0e4f-43e0-bced-7345377fdf73"
+  }
+]

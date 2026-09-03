@@ -66,7 +66,7 @@ export function CheckoutShell({
           </aside>
         </div>
       ) : (
-        <div className={focused ? "max-w-2xl" : undefined}>{children}</div>
+        <div className="w-full min-w-0">{children}</div>
       )}
     </Container>
   );

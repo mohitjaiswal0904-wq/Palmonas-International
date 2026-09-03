@@ -1,0 +1,151 @@
+{
+  "fileKey": "t7vAMEhOoRqD7hiBhhnirE",
+  "fileUrl": "https://www.figma.com/design/t7vAMEhOoRqD7hiBhhnirE/International",
+  "viewport": { "width": 1728, "height": 1117, "label": "MacBook Pro 16\" desktop" },
+  "repo": "Palmonas International — Next.js 15 / TypeScript / Tailwind v4 / Zustand",
+  "pages": [
+    "00 — Read Me (Dev Handoff)",
+    "01 — Architecture & Routes",
+    "02 — Foundations",
+    "03 — Components",
+    "10 — Desktop Screens",
+    "11 — User Flows",
+    "12 — Overlays & States"
+  ],
+  "sections": [
+    "Marketing",
+    "Catalogue",
+    "Product Detail",
+    "Collections",
+    "Checkout",
+    "Account",
+    "Content & Policies",
+    "System"
+  ],
+  "flows": [
+    {
+      "id": "discovery",
+      "title": "Flow 1 — Discovery & Browse",
+      "summary": "User lands on homepage, explores categories/collections, and reaches a product listing.",
+      "entryPoints": ["Direct URL", "Header nav", "Footer links", "Homepage CTAs"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / Home / Default", "route": "/", "code": "src/app/page.tsx", "behavior": "Hero + category grid + collection editorial. Data from @/data (categories, products, BANNERS)." },
+        { "order": 2, "frame": "Desktop / Jewellery / All", "route": "/jewellery", "code": "src/app/jewellery/page.tsx", "behavior": "Full catalogue PLP with sort/filter query params (?sort=new, ?metal=silver)." },
+        { "order": 3, "frame": "Desktop / Jewellery / Rings", "route": "/jewellery/rings", "code": "src/app/jewellery/[category]/page.tsx", "behavior": "Category PLP. Filters open via ui store overlay=filters." },
+        { "order": 4, "frame": "Desktop / Collections / Index", "route": "/collections", "code": "src/app/collections/page.tsx", "behavior": "Only collections with products appear (enriched productIds)." }
+      ],
+      "state": ["region store → currency display via useRegionalMoney", "ui store → search/cart/wishlist overlays"],
+      "edgeCases": ["Empty collection shells hidden from index", "PLP filters persist in URL query string"]
+    },
+    {
+      "id": "pdp-cart",
+      "title": "Flow 2 — Product Detail → Cart",
+      "summary": "User views a product, selects metal/stone/size, adds to bag, opens cart drawer.",
+      "entryPoints": ["PLP product card", "Homepage rails", "Collection detail grids"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / PDP / Default", "route": "/jewellery/[category]/[slug]", "code": "src/app/jewellery/[category]/[slug]/page.tsx", "behavior": "Gallery + ProductBuyPanel. Variant selection (metal, stone, size) before add." },
+        { "order": 2, "frame": "Desktop / Overlay / Cart Drawer", "route": "(overlay)", "code": "src/components/commerce/CartDrawer.tsx", "behavior": "Opens when ui.overlay=cart. Lines from cart store (persisted palmonas-cart)." }
+      ],
+      "state": ["cart store: add/remove/setQuantity/toggleGiftWrap", "Cart line key = productId + metal + stone + size"],
+      "edgeCases": ["Gift wrap adds $15 per line", "Checkout blocked if cart empty"]
+    },
+    {
+      "id": "checkout",
+      "title": "Flow 3 — Checkout (4 steps)",
+      "summary": "Signed-out purchase path from cart through address, offers, review, confirmation.",
+      "entryPoints": ["Cart drawer → Checkout CTA"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / Checkout / Step 1 Address", "route": "/checkout/address", "code": "src/app/checkout/address/page.tsx", "behavior": "Select saved address or add new. Redirects to /jewellery if cart empty." },
+        { "order": 2, "frame": "Desktop / Checkout / Step 2 Offers", "route": "/checkout/coupon", "code": "src/app/checkout/coupon/page.tsx", "behavior": "Apply coupon codes from src/data/commerce/coupons.ts." },
+        { "order": 3, "frame": "Desktop / Checkout / Step 3 Review", "route": "/checkout/review", "code": "src/app/checkout/review/page.tsx", "behavior": "Order summary. Totals via computeCheckoutTotals (8% tax, complimentary shipping)." },
+        { "order": 4, "frame": "Desktop / Checkout / Confirmation", "route": "/checkout/confirmation", "code": "src/app/checkout/confirmation/page.tsx", "behavior": "Success state. Cart cleared on place order." }
+      ],
+      "state": ["CheckoutShell guards empty cart", "CheckoutUiContext shares step state client-side", "Dev capture: ?figmaSeed=cart auto-seeds cart"],
+      "edgeCases": ["/checkout redirects to address", "No real payment API — prototype only"]
+    },
+    {
+      "id": "account",
+      "title": "Flow 4 — Account & Orders",
+      "summary": "Sign in, manage profile, view orders and saved addresses.",
+      "entryPoints": ["Header user icon", "/account direct URL"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / Account / Sign In", "route": "/account", "code": "src/app/account/page.tsx", "behavior": "Sign in / register forms. Demo: meera@palmonas.com / palmonas." },
+        { "order": 2, "frame": "Desktop / Account / Profile", "route": "/account/profile", "code": "src/app/account/profile/page.tsx", "behavior": "Edit name/phone. Requires authenticated user." },
+        { "order": 3, "frame": "Desktop / Account / Orders", "route": "/account/orders", "code": "src/app/account/orders/page.tsx", "behavior": "Lists demoOrders from @/data." },
+        { "order": 4, "frame": "Desktop / Account / Order Detail", "route": "/account/orders/[id]", "code": "src/app/account/orders/[id]/page.tsx", "behavior": "Timeline + line items for single order." },
+        { "order": 5, "frame": "Desktop / Account / Addresses", "route": "/account/addresses", "code": "src/app/account/addresses/page.tsx", "behavior": "Saved addresses CRUD (client-only)." }
+      ],
+      "state": ["account store persisted as palmonas-account", "AccountDrawer mirrors sign-in UX"],
+      "edgeCases": ["Unauthenticated users redirected to /account", "Dev capture: ?figmaSeed=account auto-signs demo user"]
+    },
+    {
+      "id": "content",
+      "title": "Flow 5 — Content & Support",
+      "summary": "Static info pages, policies, contact, stores.",
+      "entryPoints": ["Footer", "Header secondary nav"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / About / Default", "route": "/about", "code": "src/data/content/info/about.ts" },
+        { "order": 2, "frame": "Desktop / Contact / Default", "route": "/contact", "code": "src/data/content/info/contact.ts" },
+        { "order": 3, "frame": "Desktop / Stores / Default", "route": "/stores", "code": "src/data/commerce/stores.ts" },
+        { "order": 4, "frame": "Desktop / Policies / Index", "route": "/policies", "code": "src/app/policies/page.tsx" },
+        { "order": 5, "frame": "Desktop / Policies / Shipping", "route": "/policies/shipping-delivery", "code": "src/app/policies/[slug]/page.tsx" }
+      ],
+      "state": ["All copy authored in src/data/content/info/"],
+      "edgeCases": ["Blogs page is a stub"]
+    },
+    {
+      "id": "overlays",
+      "title": "Flow 6 — Global Overlays",
+      "summary": "Chrome-level UI not tied to a single route. Controlled by ui store.",
+      "entryPoints": ["Header icons", "Mobile nav trigger"],
+      "steps": [
+        { "order": 1, "frame": "Desktop / Overlay / Search", "route": "(overlay)", "code": "src/components/navigation/SearchOverlay.tsx", "behavior": "ui.overlay=search. Client-side product search." },
+        { "order": 2, "frame": "Desktop / Overlay / Mega Menu", "route": "(overlay)", "code": "src/components/layout/MegaMenu.tsx", "behavior": "Hover Demifine nav item. Data from primaryNav." },
+        { "order": 3, "frame": "Desktop / Overlay / Wishlist", "route": "(overlay)", "code": "src/components/commerce/WishlistDrawer.tsx", "behavior": "ui.overlay=wishlist. IDs in wishlist store." },
+        { "order": 4, "frame": "Desktop / Overlay / Account Drawer", "route": "(overlay)", "code": "src/components/account/AccountDrawer.tsx", "behavior": "Quick sign-in without leaving page." }
+      ],
+      "state": ["Only one overlay active at a time (ui.overlay enum)"],
+      "edgeCases": ["Opening overlay closes others via ui.open()"]
+    }
+  ],
+  "screens": [
+    { "name": "Home", "path": "/", "section": "Marketing", "frame": "Desktop / Home / Default", "id": "" },
+    { "name": "About", "path": "/about", "section": "Marketing", "frame": "Desktop / About / Default", "id": "" },
+    { "name": "Contact", "path": "/contact", "section": "Marketing", "frame": "Desktop / Contact / Default", "id": "" },
+    { "name": "Stores", "path": "/stores", "section": "Marketing", "frame": "Desktop / Stores / Default", "id": "" },
+    { "name": "Size Guide", "path": "/size-guide", "section": "Marketing", "frame": "Desktop / Size Guide / Default", "id": "" },
+    { "name": "Blogs", "path": "/blogs", "section": "Marketing", "frame": "Desktop / Blogs / Default", "id": "" },
+    { "name": "Jewellery All", "path": "/jewellery", "section": "Catalogue", "frame": "Desktop / Jewellery / All", "id": "" },
+    { "name": "Jewellery Rings", "path": "/jewellery/rings", "section": "Catalogue", "frame": "Desktop / Jewellery / Rings", "id": "" },
+    { "name": "Jewellery Necklaces", "path": "/jewellery/necklaces", "section": "Catalogue", "frame": "Desktop / Jewellery / Necklaces", "id": "" },
+    { "name": "Jewellery Earrings", "path": "/jewellery/earrings", "section": "Catalogue", "frame": "Desktop / Jewellery / Earrings", "id": "" },
+    { "name": "Jewellery Bracelets", "path": "/jewellery/bracelets", "section": "Catalogue", "frame": "Desktop / Jewellery / Bracelets", "id": "" },
+    { "name": "PDP", "path": "/jewellery/bracelets/925-sterling-silver-beat-drop-bracelet", "section": "Product Detail", "frame": "Desktop / PDP / Default", "id": "" },
+    { "name": "Collections", "path": "/collections", "section": "Collections", "frame": "Desktop / Collections / Index", "id": "" },
+    { "name": "Collection Essential", "path": "/collections/essential", "section": "Collections", "frame": "Desktop / Collections / Essential", "id": "" },
+    { "name": "Collection Ode To Nature", "path": "/collections/ode-to-nature", "section": "Collections", "frame": "Desktop / Collections / Ode To Nature", "id": "" },
+    { "name": "Collection 9KT Gold", "path": "/collections/9kt-fine-gold", "section": "Collections", "frame": "Desktop / Collections / 9KT Fine Gold", "id": "" },
+    { "name": "Policies Index", "path": "/policies", "section": "Content & Policies", "frame": "Desktop / Policies / Index", "id": "" },
+    { "name": "Policy Shipping", "path": "/policies/shipping-delivery", "section": "Content & Policies", "frame": "Desktop / Policies / Shipping", "id": "" },
+    { "name": "Policy Returns", "path": "/policies/return-exchange", "section": "Content & Policies", "frame": "Desktop / Policies / Returns", "id": "" },
+    { "name": "Policy Privacy", "path": "/policies/privacy", "section": "Content & Policies", "frame": "Desktop / Policies / Privacy", "id": "" },
+    { "name": "Account Sign In", "path": "/account", "section": "Account", "frame": "Desktop / Account / Sign In", "id": "" },
+    { "name": "Account Profile", "path": "/account/profile?figmaSeed=account", "section": "Account", "frame": "Desktop / Account / Profile", "id": "" },
+    { "name": "Account Orders", "path": "/account/orders?figmaSeed=account", "section": "Account", "frame": "Desktop / Account / Orders", "id": "" },
+    { "name": "Account Order Detail", "path": "/account/orders/ord-pm-2912?figmaSeed=account", "section": "Account", "frame": "Desktop / Account / Order Detail", "id": "" },
+    { "name": "Account Addresses", "path": "/account/addresses?figmaSeed=account", "section": "Account", "frame": "Desktop / Account / Addresses", "id": "" },
+    { "name": "Checkout Address", "path": "/checkout/address?figmaSeed=cart", "section": "Checkout", "frame": "Desktop / Checkout / Step 1 Address", "id": "" },
+    { "name": "Checkout Coupon", "path": "/checkout/coupon?figmaSeed=cart", "section": "Checkout", "frame": "Desktop / Checkout / Step 2 Offers", "id": "" },
+    { "name": "Checkout Review", "path": "/checkout/review?figmaSeed=cart", "section": "Checkout", "frame": "Desktop / Checkout / Step 3 Review", "id": "" },
+    { "name": "Checkout Confirmation", "path": "/checkout/confirmation?figmaSeed=cart", "section": "Checkout", "frame": "Desktop / Checkout / Confirmation", "id": "" },
+    { "name": "404", "path": "/this-page-does-not-exist", "section": "System", "frame": "Desktop / System / Not Found", "id": "" }
+  ],
+  "overlays": [
+    { "name": "Cart Drawer", "frame": "Desktop / Overlay / Cart Drawer", "trigger": "Header bag icon", "seed": "?figmaSeed=cart on any page then open cart" },
+    { "name": "Wishlist Drawer", "frame": "Desktop / Overlay / Wishlist Drawer", "trigger": "Header heart icon" },
+    { "name": "Search Overlay", "frame": "Desktop / Overlay / Search", "trigger": "Header search icon" },
+    { "name": "Mega Menu", "frame": "Desktop / Overlay / Mega Menu", "trigger": "Hover Demifine Collection nav" },
+    { "name": "Account Drawer", "frame": "Desktop / Overlay / Account Drawer", "trigger": "Header user icon" },
+    { "name": "PLP Filters", "frame": "Desktop / Overlay / PLP Filters", "trigger": "Filters button on category PLP" }
+  ]
+}
