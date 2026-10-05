@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Star, Truck, ShieldCheck, CalendarDays, Check } from "lucide-react";
+import { Star, Truck, Check } from "lucide-react";
 import type { Product } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { WishlistButton } from "@/components/product/WishlistButton";
@@ -237,14 +237,6 @@ export function ProductBuyPanel({ product }: { product: Product }) {
         <li className="flex items-center gap-3 font-sans text-[0.82rem] text-ink-muted">
           <Truck size={15} strokeWidth={1.4} className="text-ink" />
           {product.deliveryEstimate}
-        </li>
-        <li className="flex items-center gap-3 font-sans text-[0.82rem] text-ink-muted">
-          <ShieldCheck size={15} strokeWidth={1.4} className="text-ink" />
-          Lifetime craftsmanship warranty · complimentary returns
-        </li>
-        <li className="flex items-center gap-3 font-sans text-[0.82rem] text-ink-muted">
-          <CalendarDays size={15} strokeWidth={1.4} className="text-ink" />
-          <button className="link-underline text-ink">Book a private appointment</button>
         </li>
       </ul>
 

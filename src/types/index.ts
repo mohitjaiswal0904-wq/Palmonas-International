@@ -29,6 +29,7 @@ export type {
   NavEntry,
   HomeCategory,
   HomeStyle,
+  HomeUsp,
   InfoBlock,
   InfoPage,
   FooterLink,

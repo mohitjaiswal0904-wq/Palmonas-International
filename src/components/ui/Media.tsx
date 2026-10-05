@@ -26,7 +26,7 @@ export function Media({
   priority?: boolean;
   fill?: boolean;
 }) {
-  const isReal = !!src && /^https?:\/\//.test(src);
+  const isReal = !!src && (/^https?:\/\//.test(src) || src.startsWith("/"));
 
   if (isReal) {
     return (

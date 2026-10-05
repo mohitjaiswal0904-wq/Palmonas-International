@@ -43,6 +43,12 @@ export type HomeStyle = {
   seed: string;
 };
 
+export type HomeUsp = {
+  id: string;
+  label: string;
+  icon: string;
+};
+
 /** Policy / about / help pages rendered by InfoPageView. */
 export type InfoBlock =
   | { type: "p"; text: string }

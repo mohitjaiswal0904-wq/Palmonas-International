@@ -8,14 +8,6 @@ export const primaryNav: NavEntry[] = [
     href: "/jewellery?sort=new",
   },
   {
-    label: "Best Seller",
-    href: "/jewellery?sort=bestsellers",
-  },
-  {
-    label: "Fine Silver",
-    href: "/jewellery?metal=silver",
-  },
-  {
     label: "9KT Fine Gold",
     href: "/collections/9kt-fine-gold",
   },

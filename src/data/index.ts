@@ -34,7 +34,16 @@ export {
 export { primaryNav } from "./content/navigation";
 export type { NavEntry, NavLink, MegaColumn } from "./content/navigation";
 export { announcements } from "./content/announcements";
-export { homeCategories, homeStyles } from "./content/home";
+export {
+  HOME_IMAGES,
+  homeCategories,
+  homeFormTiles,
+  homeStyles,
+  homeStyleSection,
+  homeUsps,
+  homeCollectionStories,
+  homeGifting,
+} from "./content/home";
 export {
   footerIntro,
   footerAbout,

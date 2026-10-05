@@ -2,35 +2,32 @@ import Link from "next/link";
 import { Hero } from "@/components/editorial/Hero";
 import { CategoryCircles } from "@/components/editorial/CategoryCircles";
 import { ShopByStyle } from "@/components/editorial/ShopByStyle";
-import { StoreSection } from "@/components/editorial/StoreSection";
+import { CollectionStories } from "@/components/editorial/CollectionStories";
 import { SectionHeading } from "@/components/editorial/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductRail } from "@/components/product/ProductRail";
-import { Wordmark } from "@/components/layout/Wordmark";
-import { newArrivals, bestSellers, productsByCollection, categories } from "@/data";
-import { CATEGORY_IMAGERY } from "@/data/generated/imagery";
-import { BANNERS } from "@/lib/banners";
+import {
+  newArrivals,
+  bestSellers,
+  homeFormTiles,
+  homeGifting,
+  HOME_IMAGES,
+} from "@/data";
 import { features } from "@/lib/features";
 
 const arrivals = [...newArrivals(), ...bestSellers()]
   .filter((p, i, arr) => arr.findIndex((x) => x.id === p.id) === i)
   .slice(0, 5);
 
-/** Featured home collection — use a live catalogue only (empty shells 404). */
-const FEATURED_COLLECTION = "9kt-fine-gold" as const;
-const featuredPieces = productsByCollection(FEATURED_COLLECTION).slice(0, 3);
-const featuredHref = `/collections/${FEATURED_COLLECTION}`;
-
 export default function HomePage() {
   return (
     <>
       <Hero />
 
-      {/* 02 — Category discovery (asymmetric) */}
-      <section className="border-t border-line py-24 sm:py-32">
+      <section className="pb-10 pt-[60px]">
         <Container>
           <Reveal>
             <SectionHeading
@@ -40,41 +37,23 @@ export default function HomePage() {
             />
           </Reveal>
           <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-            {categories.slice(0, 4).map((c, i) => (
-              <Reveal
-                key={c.slug}
-                delay={i * 0.08}
-                as="div"
-                className={i === 1 ? "lg:mt-14" : i === 3 ? "lg:mt-14" : ""}
-              >
-                <Link href={`/jewellery/${c.slug}`} className="group block">
+            {homeFormTiles.map((c, i) => (
+              <Reveal key={c.slug} delay={i * 0.08} as="div">
+                <Link href={c.href} className="group block">
                   <div className="relative aspect-square overflow-hidden bg-stone">
                     <div className="absolute inset-0 transition-transform duration-[900ms] ease-[var(--ease-editorial)] group-hover:scale-[1.05]">
                       <Media
-                        src={CATEGORY_IMAGERY[c.slug]?.[0]?.primary}
-                        seed={`home-cat-${c.slug}`}
-                        kind={
-                          c.slug === "rings"
-                            ? "ring"
-                            : c.slug === "necklaces"
-                              ? "necklace"
-                              : c.slug === "earrings"
-                                ? "earring"
-                                : "bracelet"
-                        }
+                        src={c.image}
+                        seed={c.seed}
+                        kind={c.kind}
                         alt={c.label}
                         sizes="(max-width: 1024px) 50vw, 25vw"
                       />
                     </div>
                   </div>
-                  <div className="mt-4 flex items-baseline justify-between">
-                    <span className="font-display text-2xl text-ink">
-                      {c.label}
-                    </span>
-                    <span className="link-underline font-sans text-[0.68rem] uppercase tracking-wide-sm text-ink-muted">
-                      View
-                    </span>
-                  </div>
+                  <p className="mt-4 font-display text-xl text-ink sm:text-2xl">
+                    {c.label}
+                  </p>
                 </Link>
               </Reveal>
             ))}
@@ -82,79 +61,10 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 03 — Category Version 2 (circular Shop by form) */}
       {features.categoryVersion2 ? <CategoryCircles /> : null}
 
-      {/* 03b — Shop by style */}
       <ShopByStyle />
 
-      {/* 04 — Featured live collection editorial */}
-      <section className="pb-24 pt-10 sm:pb-32 sm:pt-14">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-6">
-            <Reveal className="lg:col-span-8" as="div">
-              <Link href={featuredHref} className="group block">
-                <div className="relative aspect-[16/11] overflow-hidden bg-stone">
-                  <div className="absolute inset-0 transition-transform duration-[1100ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]">
-                    <Media
-                      src={BANNERS.signature}
-                      seed="home-9kt-hero"
-                      kind="editorial"
-                      alt="9KT Fine Gold collection campaign"
-                      sizes="(max-width: 1024px) 100vw, 66vw"
-                      priority
-                    />
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-            <div className="flex flex-col justify-end lg:col-span-4">
-              <Reveal delay={0.1}>
-                <p className="eyebrow mb-4">9KT Fine Gold</p>
-                <h2 className="font-display text-4xl leading-tight text-ink">
-                  Our most considered work
-                </h2>
-                <p className="mt-5 max-w-[40ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  Solid 9KT gold with laboratory-grown diamonds — refined forms
-                  for everyday wear and lasting occasions. The pieces we make
-                  when finish and stone quality leave nothing to chance.
-                </p>
-              </Reveal>
-              {featuredPieces[0] && (
-                <Reveal delay={0.2} className="mt-10 grid grid-cols-2 gap-4">
-                  {featuredPieces.slice(0, 2).map((p) => (
-                    <Link
-                      key={p.id}
-                      href={`/jewellery/${p.category}/${p.slug}`}
-                      className="group block"
-                    >
-                      <div className="relative aspect-square overflow-hidden bg-stone">
-                        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-                          <Media
-                            src={p.images[0].src}
-                            seed={p.images[0].seed}
-                            kind={p.images[0].plate}
-                            alt={p.images[0].alt}
-                            sizes="25vw"
-                          />
-                        </div>
-                      </div>
-                      <p className="mt-2.5 font-sans text-[0.78rem] text-ink">{p.name}</p>
-                    </Link>
-                  ))}
-                </Reveal>
-              )}
-              <Reveal delay={0.25}>
-                <ButtonLink href={featuredHref} variant="outline" className="mt-8 w-fit">
-                  View the collection
-                </ButtonLink>
-              </Reveal>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 05 — New arrivals rail */}
       <section className="pb-24 sm:pb-32">
         <Container>
           <Reveal>
@@ -170,134 +80,39 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 06 — Craftsmanship */}
-      <section className="relative overflow-hidden bg-ink py-28 text-surface sm:py-36">
-        <div className="absolute inset-0 opacity-40">
-          <Media src={BANNERS.craft} seed="home-craft-atelier" kind="detail" alt="" sizes="100vw" />
-        </div>
-        <Container className="relative">
-          <div className="max-w-[52ch]">
-            <Reveal>
-              <p className="font-sans text-[0.68rem] font-medium uppercase tracking-luxe text-surface/70">
-                The atelier
-              </p>
-              <h2 className="mt-5 font-display text-4xl leading-tight sm:text-5xl">
-                The art behind every piece
-              </h2>
-              <p className="mt-6 font-sans text-base font-light leading-relaxed text-surface/80">
-                Each design begins as a drawing and ends in the hand. Stones are
-                set one at a time, edges finished by eye, and every surface is
-                polished until it reads as light rather than shine. This is
-                demi-fine, made with the discipline of fine jewellery.
-              </p>
-              <ButtonLink
-                href="/collections"
-                variant="outline"
-                className="mt-9 border-surface/60 text-surface hover:border-surface hover:bg-surface hover:text-ink"
-              >
-                Discover our craft
-              </ButtonLink>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+      <CollectionStories />
 
-      {/* 07 — Collection story split */}
-      <section className="py-24 sm:py-32">
+      <section className="pb-20">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="order-2 lg:order-1">
-              <Reveal>
-                <p className="eyebrow mb-4">Nocturne</p>
-                <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
-                  Composed in low light
-                </h2>
-                <p className="mt-6 max-w-[46ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  Nocturne studies how jewellery behaves when the light is
-                  scarce. Stones set low and close, metals darkened at the
-                  shoulder, so each piece catches a single point of light and
-                  holds it. Restraint, rendered nocturnal.
-                </p>
-                <ButtonLink href="/collections/ode-to-nature" variant="outline" className="mt-8">
-                  Discover the story
-                </ButtonLink>
-              </Reveal>
-            </div>
-            <Reveal className="order-1 lg:order-2" as="div">
-              <div className="relative aspect-[4/5] overflow-hidden bg-stone">
-                <Media
-                  src={BANNERS.story}
-                  seed="home-nocturne-story"
-                  kind="editorial"
-                  alt="The Nocturne collection story"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
-
-      {/* 08 — Personalisation */}
-      <section className="border-y border-line bg-surface py-24 sm:py-28">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+          <div className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
             <Reveal as="div">
-              <div className="relative aspect-[16/10] overflow-hidden bg-stone">
+              <div className="relative aspect-[360/225] overflow-hidden bg-stone">
                 <Media
-                  src={BANNERS.personalisation}
-                  seed="home-personalisation"
-                  kind="detail"
-                  alt="Personalised engraving"
-                  sizes="60vw"
+                  src={HOME_IMAGES.gifting}
+                  seed="home-gifting"
+                  kind="editorial"
+                  alt="Gift-ready Palmonas jewellery"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
             </Reveal>
             <div>
               <Reveal>
-                <p className="eyebrow mb-4">Gifting</p>
-                <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
-                  Pieces worth giving
+                <p className="eyebrow">{homeGifting.eyebrow}</p>
+                <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
+                  {homeGifting.title}
                 </h2>
-                <p className="mt-6 max-w-[42ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
-                  From fine silver essentials to solid 9KT gold — choose a piece
-                  that feels considered, ready to wear from the first day.
+                <p className="mt-6 max-w-[46ch] font-sans text-[0.95rem] leading-relaxed text-ink-muted">
+                  {homeGifting.body}
                 </p>
-                <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-                  {["Bestsellers", "9KT Gold", "Silver essentials", "Mangalsutras"].map((t) => (
-                    <span key={t} className="font-sans text-[0.82rem] text-ink">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <ButtonLink href="/jewellery?sort=bestsellers" className="mt-9">
-                  Explore gift-ready pieces
+                <ButtonLink href={homeGifting.cta.href} className="mt-9">
+                  {homeGifting.cta.label}
                 </ButtonLink>
               </Reveal>
             </div>
           </div>
         </Container>
       </section>
-
-      {/* 11 — Final brand moment */}
-      <section className="py-20 sm:py-32 lg:py-44">
-        <Container width="narrow">
-          <Reveal>
-            <div className="mb-8 flex justify-center sm:mb-10">
-              <Wordmark size="lg" href={null} />
-            </div>
-            <p className="text-center font-display text-4xl leading-none text-ink sm:text-5xl lg:text-7xl">
-              Keep what matters.
-            </p>
-            <div className="mt-10 flex justify-center">
-              <ButtonLink href="/jewellery">Find your piece</ButtonLink>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* 12 — Stores (homepage only) */}
-      <StoreSection />
     </>
   );
 }
